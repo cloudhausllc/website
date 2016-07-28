@@ -5,9 +5,11 @@ one:
   first_name: FirstName1
   last_name: LastName1
   email: test_user_1@cloudhaus.org
+  password_digest: <%= BCrypt::Password.create("test_user_password1", cost: 4) %>
 
 two:
   id: 2
   first_name: FirstName2
   last_name: LastName2
   email: test_user_2@cloudhaus.org
+  password_digest: <%= BCrypt::Password.create("test_user_password2", cost: 4) %>

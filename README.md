@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/cloudhausllc/website.svg?branch=master)](https://travis-ci.org/cloudhausllc/website)
 [![Coverage Status](https://coveralls.io/repos/github/cloudhausllc/website/badge.svg?branch=master)](https://coveralls.io/github/cloudhausllc/website?branch=master)
 
-With any luck, this will be the main website for [Cloudhaus](https://cloudhaus.org), a new makerspace based out of Columbus, Ohio.
+With any luck, this will be the main website for [Cloudhaus](http://cloudhaus.org), a new makerspace based out of Columbus, Ohio.
 
 As of right now the website is pretty bare bones. It currently features: 
 

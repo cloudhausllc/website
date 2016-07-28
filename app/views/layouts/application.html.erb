@@ -116,6 +116,13 @@
               <%= mail_to 'info@cloudhaus.org', 'E-mail' %>
             </li>
             <li>
+              <%= link_to 'Facebook', 'https://www.facebook.com/cloudhausart', target: '_blank' %>
+            </li>
+            <li>
+              <%= link_to 'Twitter', 'https://twitter.com/cloudhaus', target: '_blank' %>
+            </li>
+
+            <li>
               <a href="#">Mailing List</a>
             </li>
           </ul>
@@ -157,6 +164,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
+        <p>
+          <%= link_to image_tag('icons/facebook-3-32.png'), 'https://www.facebook.com/cloudhausart', target: '_blank' %>
+          <%= link_to image_tag('icons/twitter-3-32.png'), 'https://twitter.com/cloudhaus', target: '_blank' %>
+        </p>
         <p>Copyright &copy; Cloudhaus LLC 2016</p>
       </div>
     </div>

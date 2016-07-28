@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Cloudhaus Makerspace</title>
+  <title>Cloudhaus<%= @title ? " - #{@title}" : nil %></title>
   <!-- Application core CSS -->
   <%= stylesheet_link_tag 'application.css' %>
 
@@ -39,7 +39,7 @@
 
 <body>
 
-<div class="brand"><%= image_tag 'logo.png' %></div>
+<div class="brand"><%= link_to image_tag('logo.png'), root_path %></div>
 <div class="address-bar">685 North James Rd | Columbus, OH 43219 | (614) 859-MAKE</div>
 
 <!-- Navigation -->
@@ -82,7 +82,7 @@
               <a href="#">Application</a>
             </li>
             <li>
-              <a href="#">Rules</a>
+              <%= link_to 'Rules', rules_path %>
             </li>
           </ul>
         </li>
@@ -134,10 +134,6 @@
                 <span class="glyphicon glyphicon-user"><span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu">
-                <li>
-                  <%= link_to 'Some other stuff', '#' %>
-                </li>
-                <hr/>
                 <li>
                   <%= link_to 'Logout', logout_path %>
                 </li>

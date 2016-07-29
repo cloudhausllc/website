@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726044419) do
+ActiveRecord::Schema.define(version: 20160729031721) do
 
   create_table "users", force: :cascade do |t|
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.text     "password_digest"
+    t.boolean  "active",          default: false, null: false
+    t.boolean  "admin",           default: false, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

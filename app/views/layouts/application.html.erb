@@ -134,6 +134,12 @@
                 <span class="glyphicon glyphicon-user"><span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu">
+                <% if policy(:user).index? %>
+                    <li>
+                      <%= link_to 'Users', users_path %>
+                    </li>
+                    <hr/>
+                <% end %>
                 <li>
                   <%= link_to 'Logout', logout_path %>
                 </li>

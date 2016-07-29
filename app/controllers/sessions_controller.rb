@@ -7,8 +7,12 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
 
     if user && user.authenticate(params[:session][:password])
-      log_in user
-      redirect_to root_path
+      if log_in(user)
+        redirect_to root_path
+      else
+        flash.now[:danger] = 'User account has not yet been activated.'
+        redirect_to login_path
+      end
     else
       flash.now[:danger] = 'Invalid username/password combination.'
       render 'new'

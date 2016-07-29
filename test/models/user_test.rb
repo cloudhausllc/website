@@ -85,5 +85,9 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test 'new users should be inactive' do
+    @user.save
+    assert_equal @user[:active], false
+  end
 
 end

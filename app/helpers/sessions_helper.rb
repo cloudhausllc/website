@@ -1,7 +1,12 @@
 module SessionsHelper
 
   def log_in(user)
-    session[:user_id] = user.id
+    if user[:active]
+      session[:user_id] = user.id
+      return true
+    else
+      return false
+    end
   end
 
   def log_out

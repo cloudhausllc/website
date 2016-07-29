@@ -30,6 +30,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'coveralls', require: false
 
+gem 'pundit'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -1,15 +1,53 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+user1:
   id: 1
   first_name: FirstName1
   last_name: LastName1
   email: test_user_1@cloudhaus.org
-  password_digest: <%= BCrypt::Password.create("test_user_password1", cost: 4) %>
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: false
 
-two:
+user2:
   id: 2
   first_name: FirstName2
   last_name: LastName2
   email: test_user_2@cloudhaus.org
-  password_digest: <%= BCrypt::Password.create("test_user_password2", cost: 4) %>
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: false
+
+inactive_user:
+  id: 3
+  first_name: FirstName3
+  last_name: LastName3
+  email: test_user_3@cloudhaus.org
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: false
+  admin: false
+
+active_user:
+  id: 4
+  first_name: FirstName4
+  last_name: LastName4
+  email: test_user_4@cloudhaus.org
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: false
+
+admin_user:
+  first_name: Admin
+  last_name: User
+  email: admin@cloudhaus.org
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: true
+
+regular_user:
+  first_name: Regular
+  last_name: User
+  email: regular_user@gmail.com
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: false

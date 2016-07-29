@@ -3,7 +3,7 @@ require 'test_helper'
 class SessionsHelperTest < ActionView::TestCase
 
   def setup
-    @user = users(:one)
+    @user = users(:user1)
   end
 
   test 'should log in user' do

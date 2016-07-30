@@ -38,6 +38,10 @@ class UserPolicy < ApplicationPolicy
     must_be_logged_in(user, record) and user[:admin] and record != user
   end
 
+  def create?
+    true if user.nil? or user[:admin]
+  end
+
   def permitted_attributes
     if not user.nil?
       if user[:admin]
@@ -47,24 +51,6 @@ class UserPolicy < ApplicationPolicy
       end
     else
       [:first_name, :last_name, :password, :email]
-    end
-  end
-
-  def create?
-    true if user.nil? or user[:admin]
-  end
-
-  private
-
-  def admin_or_self?(user, record)
-    user[:admin] or record == user
-  end
-
-  def must_be_logged_in(user, record)
-    if user
-      return true
-    else
-      raise Pundit::NotAuthorizedError, 'must be logged in'
     end
   end
 

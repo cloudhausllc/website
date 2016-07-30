@@ -1,17 +1,16 @@
 class UserPolicy < ApplicationPolicy
 
   def initialize(user, record)
-    raise Pundit::NotAuthorizedError, 'must be logged in' unless user
     @user = user
     @record = record
   end
 
   def index?
-    user[:admin]
+    must_be_logged_in(user, record) and user[:admin]
   end
 
   def show?
-    admin_or_self?(user, record)
+    must_be_logged_in(user, record) and admin_or_self?(user, record)
   end
 
   def permitted_attributes_for_create
@@ -19,11 +18,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    admin_or_self?(user, record)
+    must_be_logged_in(user, record) and admin_or_self?(user, record)
   end
 
   def update?
-    admin_or_self?(user, record)
+    must_be_logged_in(user, record) and admin_or_self?(user, record)
   end
 
 
@@ -36,7 +35,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user[:admin] and record != user
+    must_be_logged_in(user, record) and user[:admin] and record != user
   end
 
   def permitted_attributes
@@ -51,10 +50,22 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    true if user.nil? or user[:admin]
+  end
+
   private
 
   def admin_or_self?(user, record)
     user[:admin] or record == user
+  end
+
+  def must_be_logged_in(user, record)
+    if user
+      return true
+    else
+      raise Pundit::NotAuthorizedError, 'must be logged in'
+    end
   end
 
 end

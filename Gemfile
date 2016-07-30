@@ -33,6 +33,8 @@ gem 'coveralls', require: false
 gem 'pundit'
 gem 'policy-assertions'
 
+gem 'font-awesome-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

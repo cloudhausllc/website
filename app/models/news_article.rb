@@ -1,9 +1,9 @@
 class NewsArticle < ActiveRecord::Base
-  belongs_to :user
-
   validates :subject, :body, :user, presence: true
   validates :published, inclusion: [true, false]
   before_validation :set_author
+
+  belongs_to :user, required: true
 
   default_scope {
     order(created_at: :desc)

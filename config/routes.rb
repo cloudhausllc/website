@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  namespace :asset do
+    resources :tools
+  end
   resources :news_articles
-  resources :permissions
   resources :users
 
   get '/login' => 'sessions#new', as: :login

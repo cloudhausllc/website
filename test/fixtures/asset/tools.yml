@@ -1,0 +1,73 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+active_tool:
+  active: true
+  on_premises: true
+  value: 20000
+  name: Angle Grinder
+  user: admin_user
+  quantity: 1
+  url: http://cloudhaus.org
+  sqft: 10
+  model_number: MODEL12345
+  notes: This tool has notes!
+
+inactive_tool:
+  active: false
+  on_premises: true
+  value: 20000
+  name: Angle Grinder
+  user: admin_user
+  quantity: 1
+  url: http://cloudhaus.org
+  sqft: 10
+  model_number: MODEL12345
+  notes: This tool has notes!
+
+active_tool_on_premises:
+  active: true
+  on_premises: true
+  value: 20000
+  name: Angle Grinder
+  user: admin_user
+  quantity: 1
+  url: http://cloudhaus.org
+  sqft: 10
+  model_number: MODEL12345
+  notes: This tool has notes!
+
+inactive_tool_on_premises:
+  active: false
+  on_premises: true
+  value: 20000
+  name: Angle Grinder
+  user: admin_user
+  quantity: 1
+  url: http://cloudhaus.org
+  sqft: 10
+  model_number: MODEL12345
+  notes: This tool has notes!
+
+active_tool_off_premises:
+  active: true
+  on_premises: false
+  value: 20000
+  name: Angle Grinder
+  user: admin_user
+  quantity: 1
+  url: http://cloudhaus.org
+  sqft: 10
+  model_number: MODEL12345
+  notes: This tool has notes!
+
+inactive_tool_off_premises:
+  active: false
+  on_premises: false
+  value: 20000
+  name: Angle Grinder
+  user: admin_user
+  quantity: 1
+  url: http://cloudhaus.org
+  sqft: 10
+  model_number: MODEL12345
+  notes: This tool has notes!

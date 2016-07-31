@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Asset Tools</h1>
+
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="box">
+    <h1>Tools</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+        <thead>
+        <tr>
+          <td>Name</td>
+          <td>Model number</td>
+          <td class="text-center">Quantity</td>
+          <td class="text-center">Url</td>
+          <% if User.cu_is_admin? %>
+              <td>Owner</td>
+              <td class="text-center">Value</td>
+              <td class="text-center">Sqft</td>
+              <td class="text-center">Active</td>
+              <td style="width: 8em;">On premises</td>
+              <td class="text-center">Edit</td>
+              <td class="text-center">Delete</td>
+          <% end %>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @asset_tools.each do |asset_tool| %>
+            <tr class="">
+              <td><%= link_to asset_tool.name, asset_tool %></td>
+              <td><%= asset_tool.model_number %></td>
+              <td class="text-center"><%= asset_tool.quantity %></td>
+              <td class="text-center"><%= asset_tool.url.nil? ? 'None' : (link_to 'Link', asset_tool.url) %></td>
+              <% if User.cu_is_admin? %>
+                  <td><%= "#{asset_tool.user.first_name} #{asset_tool.user.last_name}" %></td>
+                  <td class="text-center"><%= asset_tool.value %></td>
+                  <td class="text-center"><%= asset_tool.sqft %></td>
+                  <td class="text-center <%= asset_tool.active ? 'true' : 'false' %>"><%= asset_tool.active ? fa_icon('check') : fa_icon('times') %></td>
+                  <td class="text-center <%= asset_tool.active ? 'true' : 'false' %>"><%= asset_tool.active ? fa_icon('check') : fa_icon('times') %></td>
+                  <td class="text-center"><%= link_to fa_icon('edit'), edit_asset_tool_path(asset_tool) %></td>
+                  <td class="text-center"><%= link_to fa_icon('trash'), asset_tool, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+              <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'New Tool', new_asset_tool_path %>

@@ -1,0 +1,1 @@
+json.array! @asset_tools, partial: 'asset_tools/asset_tool', as: :asset_tool

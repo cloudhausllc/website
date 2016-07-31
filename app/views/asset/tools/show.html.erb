@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      <strong>Name:</strong>
+      <%= @asset_tool.name %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <strong>Active:</strong>
+      <span class="<%= @asset_tool.active ? 'true' : 'false' %>"><%= @asset_tool.active ? fa_icon('check') : fa_icon('times') %></span>
+    </p>
+    <p>
+      <strong>On premises:</strong>
+      <span class="<%= @asset_tool.on_premises ? 'true' : 'false' %>"><%= @asset_tool.on_premises ? fa_icon('check') : fa_icon('times') %></span>
+    </p>
+    <p>
+      <strong>Quantity:</strong>
+      <%= @asset_tool.quantity %>
+    </p>
+  </div>
+  <div class="col-md-4">
+    <p>
+      <strong>Owner:</strong><br />
+      <%= link_to "#{@asset_tool.user.first_name} #{@asset_tool.user.last_name}", @asset_tool.user %>
+    </p>
+    <p>
+      <strong>Value:</strong>
+      <%= number_to_currency(@asset_tool.value) %>
+    </p>
+    <p>
+      <strong>Model number:</strong>
+      <%= @asset_tool.model_number || 'N/A' %>
+    </p>
+  </div>
+
+  <div class="col-md-4">
+    <p>
+      <strong>SqFt Requirement:</strong>
+      <%= @asset_tool.sqft %> sqft
+    </p>
+    <p>
+      <strong>URL:</strong>
+      <%= @asset_tool.url.nil? ? 'N/A' : (link_to 'Link', @asset_tool.url) %>
+    </p>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      <strong>Notes:</strong>
+      <%= @asset_tool.notes %>
+    </p>
+  </div>
+</div>
+
+<% if User.cu_is_admin? %>
+    <br/>
+    <%= link_to 'Edit', edit_asset_tool_path(@asset_tool) if User.cu_is_admin? %>
+<% end %>

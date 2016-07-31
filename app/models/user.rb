@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates :password, length: {minimum: 8}, allow_nil: true
 
   has_many :news_articles
+  has_many :asset_tools, :class_name => 'Asset::Tool'
 
   cattr_accessor :current_user
 

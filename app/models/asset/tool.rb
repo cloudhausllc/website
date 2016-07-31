@@ -1,10 +1,11 @@
 class Asset::Tool < ActiveRecord::Base
-  validates :name, :quantity, :sqft, :user,  presence: true
+  validates :name, :quantity, :sqft, :value,  presence: true
   validates :active, :on_premises, inclusion: [true, false]
+  validates :quantity, :sqft, :numericality => { :greater_than_or_equal_to => 0 }
 
   before_validation :set_owner
 
-  belongs_to :user, required: true
+  belongs_to :user
 
   default_scope {
     order(created_at: :desc)

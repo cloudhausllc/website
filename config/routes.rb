@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get '/rules' => 'static#rules', as: :rules
   get '/facilities' => 'static#facilities', as: :facilities
+  get '/pricing' => 'static#pricing', as: :pricing
 
   root 'index#index'
   # The priority is based upon order of creation: first created -> highest priority.

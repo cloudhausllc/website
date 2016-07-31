@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  namespace :asset do
+    resources :tools
+  end
   resources :news_articles
-  resources :permissions
   resources :users
 
   get '/login' => 'sessions#new', as: :login
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :logout
 
   get '/rules' => 'static#rules', as: :rules
+  get '/facilities' => 'static#facilities', as: :facilities
 
   root 'index#index'
   # The priority is based upon order of creation: first created -> highest priority.

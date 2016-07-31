@@ -11,6 +11,12 @@ class NewsArticleTest < ActiveSupport::TestCase
         user: @admin_user,
         published: true
     )
+
+    @article_missing_user = NewsArticle.new(
+        subject: 'This is a subject!',
+        body: 'This is a news article body!',
+        published: true
+    )
   end
 
   test 'should be valid' do
@@ -34,15 +40,5 @@ class NewsArticleTest < ActiveSupport::TestCase
       @news_article.body = test_value
       refute @news_article.valid?
     end
-  end
-
-  test 'user can not be nil' do
-    @news_article.user = nil
-    assert_not @news_article.valid?
-  end
-
-  test 'user must exist' do
-    @news_article.user_id = -1
-    assert_not @news_article.valid?
   end
 end

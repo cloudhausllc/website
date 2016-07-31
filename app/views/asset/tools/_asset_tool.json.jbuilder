@@ -1,0 +1,2 @@
+json.extract! asset_tool, :id, :active, :on_premises, :value, :name, :user_id, :quantity, :url, :sqft, :model_number, :notes, :created_at, :updated_at
+json.url asset_tool_url(asset_tool, format: :json)

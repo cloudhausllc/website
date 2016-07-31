@@ -1,0 +1,82 @@
+<%= form_for(@asset_tool) do |f| %>
+    <% if @asset_tool.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@asset_tool.errors.count, "error") %> prohibited this asset_tool from being saved:</h2>
+
+          <ul>
+            <% @asset_tool.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          <strong>Name:</strong>
+          <%= f.text_field :name, class: 'form-control' %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <p>
+          <strong>Quantity:</strong>
+          <%= f.number_field :quantity, class: 'form-control' %>
+        </p>
+        <p>
+          <strong>Model number:</strong>
+          <%= f.text_field :model_number, class: 'form-control' %>
+        </p>
+        <p>
+          <strong>SqFt Requirement:</strong>
+          <%= f.number_field :sqft, class: 'form-control' %>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <p>
+          <strong>Value:</strong>
+          <%= f.number_field :value, class: 'form-control' %>
+        </p>
+        <p>
+          <strong>URL:</strong>
+          <%= f.number_field :url, class: 'form-control' %>
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <p>
+          <strong>Active:</strong>
+          <%= f.check_box :active %>
+        </p>
+        <p>
+          <strong>On premises:</strong>
+          <%= f.check_box :active %>
+        </p>
+        <p>
+          <%# TODO: Create a method of selecting a user. %>
+          <strong>Owner:</strong><br/>
+          <%= link_to "#{@asset_tool.user.first_name} #{@asset_tool.user.last_name}", @asset_tool.user %>
+        </p>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          <strong>Notes:</strong>
+          <%= f.text_area :notes, class: 'form-control' %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 actions">
+        <%= f.submit 'Submit', class: 'form-control' %>
+      </div>
+    </div>
+
+
+
+
+<% end %>

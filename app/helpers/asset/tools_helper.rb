@@ -1,0 +1,2 @@
+module Asset::ToolsHelper
+end

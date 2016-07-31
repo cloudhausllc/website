@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730081802) do
+ActiveRecord::Schema.define(version: 20160731034055) do
+
+  create_table "asset_tools", force: :cascade do |t|
+    t.boolean  "active",       default: false, null: false
+    t.boolean  "on_premises",  default: false, null: false
+    t.integer  "value"
+    t.text     "name"
+    t.integer  "user_id",                      null: false
+    t.integer  "quantity",     default: 1,     null: false
+    t.text     "url"
+    t.integer  "sqft"
+    t.text     "model_number"
+    t.text     "notes"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
 
   create_table "news_articles", force: :cascade do |t|
     t.integer  "user_id",                    null: false

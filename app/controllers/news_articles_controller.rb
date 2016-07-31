@@ -74,6 +74,6 @@ class NewsArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def news_article_params
-      params.require(:news_article).permit(:user_id, :subject, :body, :published)
+      params.require(:news_article).permit(policy(@news_article || NewsArticle).permitted_attributes)
     end
 end

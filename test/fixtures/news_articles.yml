@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+news_article:
+  user: admin_user
+  subject: This is just a random news article.
+  body: This is the body of a random news article.
+  published: true
+
+unpublished_article:
+  user: admin_user
+  subject: This is a the subject of an unpublished test news article.
+  body: This is the body of an unpublished test news article.
+  published: false
+
+published_article:
+  user: admin_user
+  subject: This is a the subject of a published test news article.
+  body: This is the body of a published test news article.
+  published: true

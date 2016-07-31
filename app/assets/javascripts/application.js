@@ -11,8 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+//= require bootstrap-sprockets
+//= require summernote
 //= require turbolinks
-//= require bootstrap
 //= require navigation
+
 //= require_tree .
+

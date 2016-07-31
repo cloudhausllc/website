@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :news_articles
   resources :permissions
   resources :users
 

@@ -53,6 +53,14 @@ class ApplicationPolicy
 
   private
 
+  def must_be_admin(user, record)
+    if user and user[:admin]
+      return true
+    else
+      return false
+    end
+  end
+
   def admin_or_self?(user, record)
     user[:admin] or record == user
   end

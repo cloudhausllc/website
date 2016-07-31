@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729031721) do
+ActiveRecord::Schema.define(version: 20160730081802) do
+
+  create_table "news_articles", force: :cascade do |t|
+    t.integer  "user_id",                    null: false
+    t.text     "subject"
+    t.text     "body"
+    t.boolean  "published",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.text     "first_name"

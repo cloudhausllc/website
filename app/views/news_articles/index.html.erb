@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<h1>News</h1>
+<%= link_to 'New News article', new_news_article_path if User.cu_is_admin? %>
+
+<%= render @news_articles %>
+
+

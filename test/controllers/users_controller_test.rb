@@ -8,6 +8,10 @@ class UsersControllerTest < ActionController::TestCase
     @regular_user = users(:regular_user)
   end
 
+  teardown do
+    log_out
+  end
+
   test 'admin should get index' do
     log_in(@admin_user)
     get :index
@@ -23,7 +27,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test 'anonymous user should get redirected' do
-    assert_equal logged_in?, false
+    assert_equal false, logged_in?
     get :index
     assert_nil assigns(:users)
     assert_redirected_to root_path

@@ -10,31 +10,51 @@
           </ul>
         </div>
     <% end %>
-
-    <div class="row">
-      <div class="box">
-        <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-offset-3">
+      <div class="row">
+        <div class="col-md-4">
           <div class="field">
-            <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control' %>
           </div>
           <div class="field">
-            <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control' %>
           </div>
           <div class="field">
-            <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
-          </div>
-          <div class="field">
-            <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
-          </div>
-          <div class="field">
-            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Again' %>
+            <%= f.label :email %>
+            <%= f.text_field :email, class: 'form-control' %>
           </div>
           <%# TODO: Create age confirmation %>
+        </div>
+
+        <div class="col-md-4">
+          <div class="field">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
+          <div class="field">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+          <div class="field">
+            <%= f.label :active %>
+            <%= f.check_box :active %>
+          </div>
+          <% if not User.current_user == @user %>
+              <div class="field">
+                <%= f.label :admin %>
+                <%= f.check_box :admin %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
           <div class="actions">
-            <%= f.submit 'Register', class: 'form-control' %>
+            <%= f.submit 'Update', class: 'form-control' %>
           </div>
         </div>
       </div>
     </div>
-
 <% end %>

@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-8">
+    <h2><%= news_article.subject.html_safe %><br/>
+      <small>Author: <%= "#{news_article.user.first_name} #{news_article.user.last_name}" %><br/>
+      <%= time_tag news_article.created_at, pubdate: true %>
+      </small>
+    </h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <%= news_article.body.html_safe %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    Permalink: <%= link_to news_article_url(news_article), news_article_url(news_article) %>
+    <% if User.cu_is_admin? %>
+        <br/>
+        <%= link_to 'Edit', edit_news_article_path(news_article) if User.cu_is_admin? %>
+    <% end %>
+  </div>
+</div>
+<hr/>

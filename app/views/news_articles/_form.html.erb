@@ -1,0 +1,54 @@
+<%= form_for(@news_article) do |f| %>
+    <% if @news_article.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@news_article.errors.count, "error") %> prohibited this new article from being saved:</h2>
+
+          <ul>
+            <% @news_article.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <div class="box">
+        <div class="col-md-8">
+          <div class="field">
+            <%= f.text_field :subject, class: 'form-control', placeholder: 'Subject' %>
+          </div>
+          <div class="field">
+            <%= f.text_area :body, class: 'form-control', placeholder: 'Body', rows: 5 %>
+          </div>
+          <div class="actions">
+            <%= f.submit 'Submit', class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="row">
+            <strong>Attributes</strong>
+            <hr/>
+          </div>
+          <div class="row">
+            <div class="field">
+              <%= f.label :published %>:
+              <%= f.check_box :published %>
+            </div>
+            <div class="field">
+              <strong>Author:</strong>
+              <%= "#{current_user[:first_name]} #{current_user[:last_name]}" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#news_article_body').summernote({
+      height: 300
+    });
+  });
+</script>

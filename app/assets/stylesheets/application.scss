@@ -10,12 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap.scss
- *= require_tree .
- *= require_self
+ *= require font-awesome
+ *= require application-styles
  */
 
-
-.brand a:hover {
-    background-color: transparent !important;
-}
+@import "bootstrap-sprockets";
+@import "bootstrap-custom";
+@import "summernote";

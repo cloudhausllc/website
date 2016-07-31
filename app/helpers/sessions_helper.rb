@@ -3,6 +3,7 @@ module SessionsHelper
   def log_in(user)
     if user[:active]
       session[:user_id] = user.id
+      User.current_user = user
       return true
     else
       return false
@@ -11,12 +12,13 @@ module SessionsHelper
 
   def log_out
     session.delete(:user_id)
+    User.current_user = nil
     @current_user = nil
   end
 
   def current_user
-    if session[:user_id]
-      @current_user ||= User.find(session[:user_id])
+    if User.current_user
+      @current_user ||= User.current_user
     else
       return nil
     end

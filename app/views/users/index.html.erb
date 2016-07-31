@@ -1,33 +1,41 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="box">
+    <h1>Users</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+        <thead>
+        <tr>
+          <td>Email</td>
+          <td>First name</td>
+          <td>Last name</td>
+          <td class="text-center">Active</td>
+          <td class="text-center">Admin</td>
+          <td class="text-center">Edit</td>
+          <td class="text-center">Destroy</td>
+        </tr>
+        </thead>
 
-<h1>Listing Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Email</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+        <tbody>
+        <% @users.each do |user| %>
+            <tr class="">
+              <td><%= link_to user.email, user %></td>
+              <td><%= user.first_name %></td>
+              <td><%= user.last_name %></td>
+              <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.active ? fa_icon('check') : fa_icon('times') %></td>
+              <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.admin ? fa_icon('check') : fa_icon('times') %></td>
+              <td class="text-center"><%= link_to fa_icon('edit'), edit_user_path(user) %></td>
+              <td class="text-center">
+                <% unless current_user == user %>
+                    <%= link_to fa_icon('trash'), user, method: :delete, data: {confirm: 'Are you sure?'} %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'New User', new_user_path %>

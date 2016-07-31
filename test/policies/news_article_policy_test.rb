@@ -2,10 +2,14 @@ require 'test_helper'
 
 class NewsArticlePolicyTest < PolicyAssertions::Test
   def setup
+    @admin_user = users(:admin_user)
     @regular_user = users(:regular_user)
     @user1 = users(:user1)
-    @admin_user = users(:admin_user)
+
     @news_article = news_articles(:news_article)
+    @published_article = news_articles(:published_article)
+    @unpublished_article = news_articles(:unpublished_article)
+
     @available_actions = [:index, :new, :create, :edit, :update, :destroy]
   end
 
@@ -28,6 +32,17 @@ class NewsArticlePolicyTest < PolicyAssertions::Test
     assert_permit @admin_user, @news_article
     refute_permit @regular_user, @news_article
     refute_permit nil, @news_article
+  end
+
+  def test_show
+    assert_permit @admin_user, @published_article
+    assert_permit @admin_user, @unpublished_article
+
+    assert_permit @regular_user, @published_article
+    refute_permit @regular_user, @unpublished_article
+
+    assert_permit nil, @published_article
+    refute_permit nil, @unpublished_article
   end
 
   def test_create_and_new

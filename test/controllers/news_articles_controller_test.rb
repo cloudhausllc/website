@@ -12,12 +12,6 @@ class NewsArticlesControllerTest < ActionController::TestCase
     @published_article = news_articles(:published_article)
     @unpublished_article = news_articles(:unpublished_article)
 
-    # @published_subject = @published_article.subject
-    # @published_body = @published_article.body
-    #
-    # @unpublished_subject = @unpublished_article.subject
-    # @unpublished_body = @unpublished_article.body
-
     @admin_user = users(:admin_user)
     @regular_user = users(:regular_user)
 
@@ -154,7 +148,8 @@ class NewsArticlesControllerTest < ActionController::TestCase
   end
 
   test 'anon user should not update news_article' do
-    patch :update, id: @news_article, news_article: {body: @new_body, published: @news_article.published, subject: @new_subject, user_id: @news_article.user_id}
+    patch :update, id: @news_article, news_article: {body: @new_body, published: @news_article.published,
+                                                     subject: @new_subject, user_id: @news_article.user_id}
 
     refute_same @news_article.reload.subject, @new_subject
     refute_same @news_article.reload.body, @new_body

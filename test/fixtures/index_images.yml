@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+active_image:
+  active: true
+  user_id: 1
+  image_file_name: temp_file.png
+  image_content_type: image/png
+  image_file_size: 223312
+  image_updated_at: 2015-02-29 10:30:19 Z
+  caption: This is a test caption.
+  url: http://cloudhaus.org
+
+inactive_image:
+  active: false
+  user_id: 1
+  image_file_name: temp_file.png
+  image_content_type: image/png
+  image_file_size: 223312
+  image_updated_at: 2015-02-29 10:30:19 Z
+  caption: This is a test caption.
+  url: http://cloudhaus.org

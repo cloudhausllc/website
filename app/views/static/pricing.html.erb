@@ -1,0 +1,202 @@
+<% @title='Pricing' %>
+
+<%= content_for :head do %>
+    <style>
+
+      .plan {
+        /*background-color: silver;*/
+        border-radius: 10px;
+        border: 1px solid black;
+      }
+
+      .title {
+        padding: 5px;
+        text-align: center;
+      }
+
+      .price {
+
+      }
+
+      .description {
+        margin-top: 2em;
+        background-color: white;
+        min-height: 300px;
+        border-radius: 0px 0px 10px 10px;
+        border: 1px solid black;
+        border-width: 1px 0px 0px 0px;
+        padding: 1em;
+      }
+
+      .regular_member, .silver_member, .gold_member, .business_member {
+        background-size: auto 100%;
+      }
+
+      .regular_member {
+        background: url('<%= image_path 'regular_member.png' %>') repeat-x;
+      }
+
+      .silver_member {
+        background: url('<%= image_path 'silver.png' %>') repeat-x;
+      }
+
+      .gold_member {
+        background: url('<%= image_path 'gold.png' %>') repeat-x;
+      }
+
+      .business_member {
+        background: url('<%= image_path 'business.png' %>') repeat-x;
+      }
+
+      ul.fa-icons li.yes:before {
+        font-family: 'FontAwesome';
+        content: '\f00c';
+        margin: 0 5px 0 -15px;
+        color: green;
+      }
+
+      ul.fa-icons li.no:before {
+        font-family: 'FontAwesome';
+        content: '\f00d';
+        margin: 0 5px 0 -15px;
+        color: red;
+      }
+
+      ul.fa-icons {
+        padding-left: 20px;
+        list-style: none;
+      }
+
+      ul.fa-icons li {
+        margin-bottom: 10px;
+      }
+    </style>
+<% end %>
+<div class="row">
+  <div class="box">
+    <h2>Pricing Plans</h2>
+    <div class="col-md-3">
+      <div class="plan regular_member">
+        <div class="title">
+          <h4>Regular Member</h4>
+          <div class="price">
+            <strong>$50/mo</strong>
+          </div>
+        </div>
+        <div class="description">
+          <ul class="fa-icons">
+            <li class="yes">Monitored access to <%= link_to 'facilities', facilities_path %></li>
+            <li class="yes">Monitored access to <%= link_to 'tools', facilities_path %></li>
+            <li class="yes">Training on tools and equipment</li>
+            <li class="yes">Help from our knowledgeable staff</li>
+            <li class="no">Discounted classes & events</li>
+            <li class="no">Discounted materials (when available)</li>
+            <li class="no">Monitored friend and family visits (coming soon)</li>
+            <li class="no">Project storage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="plan silver_member">
+        <div class="title">
+          <h4>Silver Member</h4>
+          <div>
+            <strong>$100/mo</strong>
+          </div>
+        </div>
+        <div class="description">
+          <ul class="fa-icons">
+            <li class="yes">Monitored access to <%= link_to 'facilities', facilities_path %></li>
+            <li class="yes">Monitored access to <%= link_to 'tools', facilities_path %></li>
+            <li class="yes">Training on tools and equipment</li>
+            <li class="yes">Help from our knowledgeable staff</li>
+            <li class="yes">Discounted classes & events</li>
+            <li class="yes">Discounted materials (when available)</li>
+            <li class="no">Monitored friend and family visits (coming soon)</li>
+            <li class="no">Project storage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="plan gold_member">
+        <div class="title">
+          <h4>Gold Member</h4>
+          <div>
+            <strong>$150/mo</strong>
+          </div>
+        </div>
+        <div class="description">
+          <ul class="fa-icons">
+            <li class="yes"><strong>Unlimited</strong> access to <%= link_to 'facilities', facilities_path %></li>
+            <li class="yes"><strong>Unlimited</strong> access to <%= link_to 'tools', facilities_path %></li>
+            <li class="yes">Training on tools and equipment</li>
+            <li class="yes">Help from our knowledgeable staff</li>
+            <li class="yes">Discounted classes & events</li>
+            <li class="yes">Discounted materials (when available)</li>
+            <li class="yes">Monitored friend and family visits (coming soon)</li>
+            <li class="yes">Project storage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="plan business_member">
+        <div class="title">
+          <h4>Business</h4>
+          <div>
+            <strong><%= link_to 'Contact Us', 'info@cloudhaus.org' %> for business pricing.</strong>
+          </div>
+        </div>
+        <div class="description">
+          <ul class="fa-icons">
+            <li class="yes"><strong>Unlimited</strong> access to <%= link_to 'facilities', facilities_path %></li>
+            <li class="yes"><strong>Unlimited</strong> access to <%= link_to 'tools', facilities_path %></li>
+            <li class="yes">Training on tools and equipment</li>
+            <li class="yes">Help from our knowledgeable staff</li>
+            <li class="yes">Discounted classes & events</li>
+            <li class="yes">Discounted materials (when available)</li>
+            <li class="yes">Multiple people on plan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <small>Membership prices are subject to change with notice.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="box">
+    <div class="col-md-8">
+      <h2>Membership Dues</h2>
+      <p>Cloudhaus as multiple membership plans to fit your budget, each with different perks. As we continue to
+        expand
+        additional membership plans may become available.</p>
+
+      <p>Invoices for membership dues are sent at the start of every month, and are due on the 15th. Failure to pay
+        membership dues can result disciplinary action including:
+      <ul>
+        <li>Loss of membership</li>
+        <li>Loss of access to facilities & tools</li>
+        <li>Loss of access to online account</li>
+      </ul>
+      </p>
+      <p>You can cancel your membership at any time, but all membership dues are <strong>non-refundable</strong>.</p>
+
+      <p>Multiple month memberships can be purchased by contacting
+        <%= mail_to('info@cloudhaus.org') %>.</p>
+
+      <p>If you have any questions on pricing, please don't hesitate to
+        e-mail <%= mail_to('info@cloudhaus.org') %></p>
+    </div>
+  </div>
+</div>

@@ -11,15 +11,15 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-          <div class="item active">
-            <%= image_tag image_path('slide-1.jpg'), class: 'img-responsive img-full' %>
-          </div>
-          <div class="item">
-            <%= image_tag image_path('slide-2.jpg'), class: 'img-responsive img-full' %>
-          </div>
-          <div class="item">
-            <%= image_tag image_path('slide-3.jpg'), class: 'img-responsive img-full' %>
-          </div>
+          <% @index_images.each do |image| %>
+              <div class="item <%= image == @index_images.first ? 'active' : nil %>">
+                <%= link_to image_tag(image.image, class: 'img-responsive img-full'), (image.url ? image.url : index_image_path(image)) %>
+                <% if image.caption %>
+                    <div class="carousel-caption"><%= image.caption %></div>
+                <% end %>
+                </a>
+              </div>
+          <% end %>
         </div>
 
         <!-- Controls -->
@@ -53,7 +53,8 @@
       <p>
         Cloudhaus exists to be a community center for the most talented DIY'ers in central Columbus. By providing our
         members
-        with <a href="#">tools</a> and <a href="#">space</a> they have <a href="#">made</a> some amazing things.
+        with <%= link_to 'tools', asset_tools_path %> and <%= link_to 'space', facilities_path %> they have
+        <a href="#">made</a> some amazing things.
         <a href="#">So can you.</a>
       </p>
     </div>
@@ -76,7 +77,7 @@
                   <%= link_to 'Create a new news article', new_news_article_path %>
               <% end %>
           <% else %>
-            <%= render @news_articles %>
+              <%= render @news_articles %>
           <% end %>
 
         </div>
@@ -92,7 +93,7 @@
       <h2 class="intro-text text-center">Upcoming Events
       </h2>
       <hr>
-      <iframe style="width: 100%; height: 600px;" src="https://calendar.google.com/calendar/embed?src=sqtga1qsurd3nt79r6cujnaj0c%40group.calendar.google.com&ctz=America/New_York" style="border: 0" frameborder="0" scrolling="no"></iframe>
+      <iframe src="https://calendar.google.com/calendar/embed?src=gumf16i7cbggbvb1i8vhg74b20%40group.calendar.google.com&ctz=America/New_York" style="border: 0; width: 100%;" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 </div>

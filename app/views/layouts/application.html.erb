@@ -50,7 +50,7 @@
         <span class="icon-bar"></span>
       </button>
       <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-      <a class="navbar-brand" href="index.html">Cloudhaus</a>
+      <%= link_to image_tag('logo_small.png'), root_path, class: 'navbar-brand' %>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -78,6 +78,9 @@
             <!--<a href="#">Application</a>-->
             <!--</li>-->
             <li>
+              <%= link_to 'Pricing & Dues', pricing_path %>
+            </li>
+            <li>
               <%= link_to 'Rules', rules_path %>
             </li>
           </ul>
@@ -97,9 +100,9 @@
             <!--<li>-->
             <!--<a href="#">Staff Profiles</a>-->
             <!--</li>-->
-            <!--<li>-->
-            <!--<a href="#">FAQ</a>-->
-            <!--</li>-->
+            <li>
+            <%= link_to 'FAQ', faq_path %>
+            </li>
           </ul>
         </li>
 
@@ -133,6 +136,9 @@
                 <% if policy(:user).index? %>
                     <li>
                       <%= link_to 'Users', users_path %>
+                    </li>
+                    <li>
+                      <%= link_to 'Mange Index Images', index_images_path %>
                     </li>
                     <li>
                       <%= link_to 'New News Article', new_news_article_path %>

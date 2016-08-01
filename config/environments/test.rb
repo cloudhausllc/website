@@ -41,4 +41,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.active_record.default_timezone = :local
+
+  Paperclip.options[:command_path] = '/opt/local/bin/'
 end

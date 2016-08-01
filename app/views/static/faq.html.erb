@@ -1,0 +1,83 @@
+<% @title='Pricing' %>
+
+<%= content_for :head do %>
+<style>
+  h4[data-toggle="collapse"] {
+    cursor: pointer;
+  }
+</style>
+<% end %>
+<div class="row">
+  <div class="box">
+    <div class="col-md-8">
+      <h2>FAQ</h2>
+    </div>
+    <div class="col-md-8">
+      <h4 data-toggle="collapse" data-target="#faq1">How much is a membership?</h4>
+      <div id="faq1" class="collapse out">In an effort to meet the needs of all of our prospective members, we have created multiple levels of members.
+        More information on our membership prices can be found on the <%= link_to 'Pricing & Dues', pricing_path %> page.</div>
+    </div>
+
+    <div class="col-md-8">
+      <h4 data-toggle="collapse" data-target="#faq2">Are there any cheaper membership plans?</h4>
+      <div id="faq2" class="collapse out">At this time, no. As Cloudhaus grows and expands we will be introducing additional membership plans.</div>
+    </div>
+
+    <div class="col-md-8">
+      <h4 data-toggle="collapse" data-target="#faq3">I have a membership, when can I come to Cloudhaus?</h4>
+      <div id="faq3" class="collapse out">In order to keep our membership prices low, we are required to have a staff member on duty any time a member is
+      on premises. Staff members will be on duty Mon-Saturday, 5PM-11PM.</div>
+    </div>
+
+    <div class="col-md-8">
+       <h4 data-toggle="collapse" data-target="#faq4">I don't have a membership, can I have a tour?</h4>
+      <div id="faq4" class="collapse out">Of course! Contact us at <%= mail_to 'info@cloudhaus.org' %> to schedule a tour.</div>
+    </div>
+
+    <div class="col-md-8">
+       <h4 data-toggle="collapse" data-target="#faq5">Can you make something for me?</h4>
+      <div id="faq5" class="collapse out">Unfortunately Cloudhaus does not access commission work. That being said, our members are welcome and encouraged
+      to take on commission work! Contact <%= mail_to 'info@cloudhaus.org' %> and we will try to find someone to help you out.</div>
+    </div>
+
+    <div class="col-md-8">
+       <h4 data-toggle="collapse" data-target="#faq6">Can my friend/mother/brother/etc. come visit?</h4>
+      <div id="faq6" class="collapse out">Gold members are able to bring visitors into Cloudhaus, but only members are allowed to use tools.
+      If you would like to provide someone else with a tour, please contact <%= mail_to 'info@cloudhaus.org' %> to schedule.</div>
+    </div>
+
+    <div class="col-md-8">
+       <h4 data-toggle="collapse" data-target="#faq7">Can I take tools home?</h4>
+      <div id="faq7" class="collapse out">Unfortunately tools can not leave the premises.</div>
+    </div>
+
+    <div class="col-md-8">
+      <h4 data-toggle="collapse" data-target="#faq8">Can I store projects that I'm working on at Cloudhaus?</h4>
+      <div id="faq8" class="collapse out">Small project storage is available for Gold members.</div>
+    </div>
+
+    <div class="col-md-8">
+      <h4 data-toggle="collapse" data-target="#faq9">What tools are available at Cloudhaus?</h4>
+      <div id="faq9" class="collapse out">All kinds! See our <%= link_to 'Tools Page', asset_tools_path %> for a full list.</div>
+    </div>
+
+    <div class="col-md-8">
+      <h4 data-toggle="collapse" data-target="#faq10">Will you buy a tool I need? / Why doesn't Cloudhaus have a tool?</h4>
+      <div id="faq10" class="collapse out">We prioritize our tool purchases based on the demand that we see from our members.
+      If we see a large demand for a tool, we'll do our best to get it! We also plan on providing our members with a way
+      to crowdfund tools in the future. In the meantime, contact <%= mail_to 'info@cloudhaus.org' %> for more information,
+      or try posting something to our <%= link_to 'Mailing List', 'https://groups.google.com/forum/#!forum/cloudhaus', target: '_new' %></div>
+    </div>
+
+    <!--<div class="col-md-8">-->
+      <!--<h4 data-toggle="collapse" data-target="#faq11"></h4>-->
+      <!--<div id="faq11" class="collapse out"></div>-->
+    <!--</div>-->
+
+    <div class="col-md-8">
+      <h4>My question isn't listed here!</h4>
+      <div>Oh no! <%= mail_to 'Contact Us', 'info@cloudhaus.org' %> and we'll do our best to get you an answer!</div>
+    </div>
+
+  </div>
+</div>

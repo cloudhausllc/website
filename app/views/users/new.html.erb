@@ -3,4 +3,44 @@
     <h1>Register</h1>
   </div>
 </div>
-<%= render 'form' %>
+
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <div class="box">
+        <div class="col-md-4 col-md-offset-4">
+          <div class="field">
+            <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
+          </div>
+          <div class="field">
+            <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+          </div>
+          <div class="field">
+            <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
+          </div>
+          <div class="field">
+            <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+          </div>
+          <div class="field">
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Again' %>
+          </div>
+          <%# TODO: Create age confirmation %>
+          <div class="actions">
+            <%= f.submit 'Register', class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

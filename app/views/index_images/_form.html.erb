@@ -1,0 +1,42 @@
+<%= form_for @index_image, html: {multipart: true} do |f| %>
+    <% if @index_image.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@index_image.errors.count, "error") %> prohibited this index_image from being saved:</h2>
+
+          <ul>
+            <% @index_image.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <p id="notice"><%= notice %></p>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="row">
+          <%= link_to image_tag(@index_image.image(:thumb)), index_image_path(@index_image) %>
+        </div>
+        <div class="row">
+          <%= f.label :url, 'URL' %><br>
+          <%= f.text_field :url, style: 'width: 90%' %>
+        </div>
+        <div class="row">
+          <%= f.label :caption %><br>
+          <%= f.text_area :caption, style: 'width: 90%; height: 100px;' %>
+        </div>
+        <div class="row">
+          <strong>Uploaded By:</strong> <%= "#{@index_image.user.first_name} #{@index_image.user.last_name}" %>
+        </div>
+        <div class="row">
+          <%= f.label :active %><%= f.check_box :active %>
+        </div>
+        <div class="row">
+          <div class="actions">
+            <%= f.submit 'Update', class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

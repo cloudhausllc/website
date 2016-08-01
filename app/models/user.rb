@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :news_articles
   has_many :asset_tools, :class_name => 'Asset::Tool'
+  has_many :index_images
 
   cattr_accessor :current_user
 

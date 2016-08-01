@@ -31,14 +31,22 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+#Test coverage
 gem 'coveralls', require: false
 
+#Permissions
 gem 'pundit'
+#Permissions tests helper
 gem 'policy-assertions'
 
+#FontAwesome library
 gem 'font-awesome-rails'
 
+#HTML text editor.
 gem 'summernote-rails', '0.8.1.1'
+
+#Image uploading
+gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip.git'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

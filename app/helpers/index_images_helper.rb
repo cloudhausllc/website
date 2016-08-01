@@ -1,0 +1,2 @@
+module IndexImagesHelper
+end

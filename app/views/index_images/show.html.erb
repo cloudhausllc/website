@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= image_tag @index_image.image.url, class: 'img-responsive img-full' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <strong>Uploaded by:</strong> <%= "#{@index_image.user.first_name} #{@index_image.user.last_name}" %>
+  </div>
+</div>
+<% if @index_image.caption %>
+    <div class="row">
+      <div class="col-md-12">
+        <strong>Caption:</strong><%= @index_image.caption %>
+      </div>
+    </div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <% if User.cu_is_admin? %>
+        <%= link_to 'Edit', edit_index_image_path(@index_image) %>
+    <% end %>
+  </div>
+</div>

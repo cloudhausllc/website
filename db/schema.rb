@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731034055) do
+ActiveRecord::Schema.define(version: 20160801012623) do
 
   create_table "asset_tools", force: :cascade do |t|
     t.boolean  "active",       default: false, null: false
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 20160731034055) do
     t.text     "notes"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+  end
+
+  create_table "index_images", force: :cascade do |t|
+    t.boolean  "active",             default: false, null: false
+    t.integer  "user_id",                            null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.text     "caption"
+    t.text     "url"
   end
 
   create_table "news_articles", force: :cascade do |t|

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :index_images
   namespace :asset do
     resources :tools
   end

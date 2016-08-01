@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <% @index_images.each do |index_image| %>
+      <div class="col-md-4">
+        <div class="row">
+          <%= image_tag index_image.image(:thumb) %>
+        </div>
+        <div class="index_actions" class="row">
+          <%= link_to fa_icon('edit'), edit_index_image_path(index_image) %><%= link_to fa_icon('trash'), index_image, method: :delete, data: {confirm: 'Are you sure?'} %>
+        </div>
+      </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="box">
+    <div class="col-md-4">
+      <%= link_to 'New Index image', new_index_image_path %>
+    </div>
+  </div>
+</div>
+
+

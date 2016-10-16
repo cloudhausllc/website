@@ -8,9 +8,10 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       if log_in(user)
+        flash.now[:success] = 'Login successful.'
         redirect_to root_path
       else
-        flash.now[:danger] = 'User account has not yet been activated.'
+        flash.now[:warning] = 'User account has not yet been activated.'
         redirect_to login_path
       end
     else

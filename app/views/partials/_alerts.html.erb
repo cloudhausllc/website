@@ -1,0 +1,13 @@
+<% %w(success info warning danger).each do |key| %>
+    <% if content_for?("alert-#{key}".to_sym) %>
+        <%= yield("alert-#{key}".to_sym) %>
+    <% else %>
+        <% if flash[key.to_sym] %>
+            <div class="row">
+              <div class="col-md-4 col-md-offset-4 text-center">
+                <div class="alert-<%= key %>"><%= flash[key.to_sym] %></div>
+              </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>

@@ -8,6 +8,7 @@ user1:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: false
+  membership_level: one
 
 user2:
   id: 2
@@ -17,6 +18,7 @@ user2:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: false
+  membership_level: two
 
 inactive_user:
   id: 3
@@ -26,6 +28,7 @@ inactive_user:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: false
   admin: false
+  membership_level: inactive_member
 
 active_user:
   id: 4
@@ -35,6 +38,7 @@ active_user:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: false
+  membership_level: regular_member
 
 admin_user:
   first_name: Admin
@@ -43,6 +47,7 @@ admin_user:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: true
+  membership_level: owner
 
 regular_user:
   first_name: Regular
@@ -51,3 +56,4 @@ regular_user:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: false
+  membership_level: foundational_member

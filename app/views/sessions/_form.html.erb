@@ -14,7 +14,7 @@
               <%= f.submit 'Login', class: 'form-control' %>
             </div>
             <div class="field">
-              <%= button_tag 'New User? Register', 'data-url' => new_user_path, 'data-action' => 'navigate', method: 'get', class: 'form-control' %>
+              <%= link_to 'New User? Register', new_user_path, class: 'form-control', style: 'text-align: center;' %>
             </div>
           </div>
         </div>

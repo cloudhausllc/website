@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="row">
+  <div class="box">
+    <div class="col-md-4">
+      <p>
+        <strong>Name:</strong>
+        <%= @membership_level.name %>
+      </p>
+      <p>
+        <strong>Monthly Payment:</strong>
+        <%= @membership_level.monthly_payment %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_membership_level_path(@membership_level) %> |
+<%= link_to 'Back', membership_levels_path %>

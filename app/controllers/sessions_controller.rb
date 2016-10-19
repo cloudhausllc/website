@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       if log_in(user)
-        flash.now[:success] = 'Login successful.'
+        flash[:success] = 'Login successful.'
         redirect_to root_path
       else
-        flash.now[:warning] = 'User account has not yet been activated.'
+        flash[:warning] = 'User account has not yet been activated. Please contact info@cloudhaus.org for further assistance.'
         redirect_to login_path
       end
     else

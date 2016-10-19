@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801012623) do
+ActiveRecord::Schema.define(version: 20161016190653) do
 
   create_table "asset_tools", force: :cascade do |t|
     t.boolean  "active",       default: false, null: false
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 20160801012623) do
     t.text     "url"
   end
 
+  create_table "membership_levels", force: :cascade do |t|
+    t.decimal  "monthly_payment"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "name"
+  end
+
   create_table "news_articles", force: :cascade do |t|
     t.integer  "user_id",                    null: false
     t.text     "subject"
@@ -54,11 +61,12 @@ ActiveRecord::Schema.define(version: 20160801012623) do
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.text     "password_digest"
-    t.boolean  "active",          default: false, null: false
-    t.boolean  "admin",           default: false, null: false
+    t.boolean  "active",              default: false, null: false
+    t.boolean  "admin",               default: false, null: false
+    t.integer  "membership_level_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

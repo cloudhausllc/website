@@ -44,7 +44,7 @@ class UsersControllerTest < ActionController::TestCase
                            password: 'test_password', password_confirmation: 'test_password'}
     end
 
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to login_path
   end
 
   test 'admins can show users' do

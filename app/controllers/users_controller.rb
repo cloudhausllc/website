@@ -31,7 +31,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        flash[:warning] = 'Your account has been created, but must be activated by an administrator.'
+        format.html { redirect_to login_path }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

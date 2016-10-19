@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :asset_tools, :class_name => 'Asset::Tool'
   has_many :index_images
 
+  belongs_to :membership_level, foreign_key: :membership_level_id
+
   cattr_accessor :current_user
 
   private

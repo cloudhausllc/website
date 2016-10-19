@@ -23,7 +23,7 @@
               <td><%= user.first_name %></td>
               <td><%= user.last_name %></td>
               <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.active ? fa_icon('check') : fa_icon('times') %></td>
-              <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.admin ? fa_icon('check') : fa_icon('times') %></td>
+              <td class="text-center <%= user.admin ? 'true' : 'false' %>"><%= user.admin ? fa_icon('check') : fa_icon('times') %></td>
               <td class="text-center"><%= link_to fa_icon('edit'), edit_user_path(user) %></td>
               <td class="text-center">
                 <% unless current_user == user %>

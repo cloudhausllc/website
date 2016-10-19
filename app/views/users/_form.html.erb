@@ -37,14 +37,22 @@
             <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, class: 'form-control' %>
           </div>
-          <div class="field">
-            <%= f.label :active %>
-            <%= f.check_box :active %>
-          </div>
-          <% if not User.current_user == @user %>
+          <% if not User.current_user == @user and User.current_user.admin %>
+              <div class="field">
+                <%= f.label :active %>
+                <%= f.check_box :active %>
+              </div>
+
               <div class="field">
                 <%= f.label :admin %>
                 <%= f.check_box :admin %>
+              </div>
+          <% end %>
+
+          <% if User.current_user.admin %>
+              <div class="field">
+                <%= f.label :membership_level %><br />
+                <%= f.collection_select :membership_level, MembershipLevel.order(:name), :id, :name, include_blank: true %>
               </div>
           <% end %>
         </div>

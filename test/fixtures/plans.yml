@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+published_plan:
+  stripe_plan_id: published_plan
+  active: true
+  stripe_plan_name: Published Plan
+  stripe_plan_amount: 10000
+  stripe_plan_interval: month
+
+two:
+  stripe_plan_id: MyText
+  active: false
+  stripe_plan_name: test
+  stripe_plan_amount: test
+  stripe_plan_interval: month

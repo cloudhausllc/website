@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :membership_levels
+  resources :plans
+  resources :payment_methods
   resources :index_images
   namespace :asset do
     resources :tools

@@ -1,0 +1,106 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-4 col-lg-9">
+    <h4>Active Plans</h4>
+  </div>
+</div>
+<% if not @plans.nil? %>
+    <div class="row">
+      <div class="col-md-4 col-lg-9">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Interval</th>
+            <th>Stripe ID</th>
+            <th>Trial Period Days</th>
+            <th>Active</th>
+            <th>Deactivate</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @plans.each do |plan| %>
+              <tr>
+                <td><%= plan.stripe_plan_name %></td>
+                <td><%= number_to_currency(plan.stripe_plan_amount/100) %></td>
+                <td><%= plan.stripe_plan_interval.capitalize %></td>
+                <td><%= plan.stripe_plan_id %></td>
+                <td class="text-center"><%= plan.stripe_plan_trial_period_days or 0 %></td>
+                <td><%= plan.active.to_s.capitalize %></td>
+                <td><%= link_to 'Select', plan, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<% else %>
+    <div class="row">
+      <div class="col-md-4 col-lg-9">
+        No active plans.
+      </div>
+    </div>
+<% end %>
+<div class="row">
+  <div class="col-md-4 col-lg-9">
+    <h4>Available Stripe Plans</h4>
+  </div>
+</div>
+<% if not @stripe_plans.nil? %>
+    <div class="row">
+      <div class="col-md-4 col-lg-9">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Interval</th>
+            <th>Stripe ID</th>
+            <th>Trial Period Days</th>
+            <th>Activate</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @stripe_plans[:data].each do |plan| %>
+              <%= form_for @new_plan do |f| %>
+                  <tr>
+                    <td>
+                      <%= plan[:name] %>
+                    </td>
+                    <td>
+                      <%= number_to_currency(plan[:amount]/100) %>
+                    </td>
+                    <td>
+                      <%= plan[:interval].capitalize %>
+                    </td>
+                    <td>
+                      <%= plan[:id] %>
+                    </td>
+                    <td class="text-center">
+                      <%= plan[:trial_period_days] or 0 %>
+                    </td>
+                    <td>
+                      <%= f.hidden_field :stripe_plan_id, value: plan[:id] %>
+                      <%= f.hidden_field :stripe_plan_name, value: plan[:name] %>
+                      <%= f.hidden_field :stripe_plan_amount, value: plan[:amount] %>
+                      <%= f.hidden_field :stripe_plan_interval, value: plan[:interval] %>
+                      <%= f.hidden_field :stripe_plan_id, value: plan[:id] %>
+                      <%= f.hidden_field :stripe_plan_trial_period_days, value: plan[:trial_period_days] %>
+                      <%= f.submit :submit, value: 'Select' %>
+                    </td>
+                  </tr>
+              <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<% else %>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-4">
+        There was an issue fetching the list of available plans from Stripe.
+      </div>
+    </div>
+<% end %>

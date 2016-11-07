@@ -2,7 +2,7 @@ require 'test_helper'
 
 class NewsArticlesControllerTest < ActionController::TestCase
   setup do
-
+    StripeMock.start
     @news_article = news_articles(:news_article)
     @news_article_subject = @news_article.subject
     @news_article_body = @news_article.body
@@ -19,6 +19,7 @@ class NewsArticlesControllerTest < ActionController::TestCase
 
   teardown do
     log_out
+    StripeMock.stop
   end
 
   test 'all users should be able to get index' do

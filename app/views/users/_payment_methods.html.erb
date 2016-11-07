@@ -1,0 +1,76 @@
+<% if not @user.payment_methods.nil? %>
+    <% @user.payment_methods.each do |card| %>
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <span class="col-md-8 col-xs-5">
+                  <strong>
+                    <%= card.brand %>, <%= card.exp_month %>/<%= card.exp_year %>, <%= card.last4 %>
+                  </strong>
+                </span>
+                <span class="col-md-1 col-xs-2"><%= link_to fa_icon('question-circle'), '#' %></span>
+                <span class="col-md-2 col-xs-2">
+
+                  <%= link_to 'Remove', card, method: :delete, data: {
+                      confirm: "Removing your payment method will cancel your subscription.\n Are you sure you wish to continue?"
+                  } %>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+<% end %>
+<%= form_for(@new_payment_method) do |f| %>
+    <% if @new_payment_method.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@new_payment_method.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @new_payment_method.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <button id="customButton" class="form-control btn-success btn">Add New Payment Method</button>
+        <%= f.hidden_field :last4 %>
+        <%= f.hidden_field :brand %>
+        <%= f.hidden_field :exp_month %>
+        <%= f.hidden_field :exp_year %>
+        <%= f.hidden_field :stripe_token_id %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+      </div>
+    </div>
+
+<% end %>
+<script>
+  var handler = StripeCheckout.configure({
+    key: '<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>',
+    locale: 'auto',
+    zipCode: true,
+    email: '<%= @user.email %>',
+    name: 'Cloudhaus',
+    panelLabel: 'Save',
+    allowRememberMe: false,
+    token: function (token) {
+      jQuery.each(['last4', 'brand', 'exp_month', 'exp_year'], function (index, key) {
+        $('input[type="hidden"][name="payment_method[' + key + ']"]').val(token.card[key])
+      });
+
+      $('input[type="hidden"][name="payment_method[stripe_token_id]"]').val(token.id);
+      $('form#new_payment_method').submit();
+    }
+  });
+
+  $(document).ready(function () {
+    $('#customButton').click(function (event) {
+      event.preventDefault();
+      handler.open();
+    });
+  });
+
+</script>

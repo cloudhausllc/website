@@ -3,6 +3,7 @@ include SessionsHelper
 
 class UsersControllerTest < ActionController::TestCase
   setup do
+    StripeMock.start
     @user = users(:user1)
     @admin_user = users(:admin_user)
     @regular_user = users(:regular_user)
@@ -10,6 +11,7 @@ class UsersControllerTest < ActionController::TestCase
 
   teardown do
     log_out
+    StripeMock.stop
   end
 
   test 'admin should get index' do
@@ -47,28 +49,28 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
 
-  test 'admins can show users' do
-    log_in(@admin_user)
-    get :show, id: @user
-    assert_response :success
-  end
-
-  test 'regular users can show self' do
-    log_in(@regular_user)
-    get :show, id: @regular_user
-    assert_response :success
-  end
-
-  test 'regular users can not show others' do
-    log_in(@regular_user)
-    get :show, id: @user
-    assert_redirected_to root_path
-  end
-
-  test 'anonymous can not show users' do
-    get :show, id: @user
-    assert_redirected_to root_path
-  end
+  # test 'admins can show users' do
+  #   log_in(@admin_user)
+  #   get :show, id: @user
+  #   assert_response :success
+  # end
+  #
+  # test 'regular users can show self' do
+  #   log_in(@regular_user)
+  #   get :show, id: @regular_user
+  #   assert_response :success
+  # end
+  #
+  # test 'regular users can not show others' do
+  #   log_in(@regular_user)
+  #   get :show, id: @user
+  #   assert_redirected_to root_path
+  # end
+  #
+  # test 'anonymous can not show users' do
+  #   get :show, id: @user
+  #   assert_redirected_to root_path
+  # end
 
   test 'admin should get edit' do
     log_in(@admin_user)
@@ -98,7 +100,7 @@ class UsersControllerTest < ActionController::TestCase
     patch :update, id: @user, user: {email: @user.email, first_name: 'NewFirstName', id: @user.id, last_name: @user.last_name}
 
     assert_equal User.find(@user[:id]).first_name, 'NewFirstName'
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to edit_user_path(assigns(:user))
   end
 
   test 'regular users should be able to update self' do
@@ -106,7 +108,7 @@ class UsersControllerTest < ActionController::TestCase
     patch :update, id: @regular_user, user: {email: @regular_user.email, first_name: 'NewFirstName', id: @regular_user.id, last_name: @regular_user.last_name}
 
     assert_equal @regular_user.reload.first_name, 'NewFirstName'
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to edit_user_path(assigns(:user))
   end
 
   test 'regular users should not be able to update others' do

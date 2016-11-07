@@ -28,9 +28,9 @@ class UserPolicy < ApplicationPolicy
 
   def permitted_attributes_for_update
     if user[:admin]
-      [:first_name, :last_name, :password, :active, :admin, :email, :membership_level]
+      [:first_name, :last_name, :password, :active, :admin, :email, :plan_id]
     else
-      [:first_name, :last_name, :password, :email]
+      [:first_name, :last_name, :password, :email, :plan_id]
     end
   end
 

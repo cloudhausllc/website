@@ -2,6 +2,7 @@ require 'test_helper'
 
 class Asset::ToolsControllerTest < ActionController::TestCase
   setup do
+    StripeMock.start
     @asset_tool = asset_tools(:active_tool)
     @asset_tool_value = @asset_tool.value
     @new_asset_tool_value = @asset_tool.value+1
@@ -12,6 +13,7 @@ class Asset::ToolsControllerTest < ActionController::TestCase
 
   teardown do
     log_out
+    StripeMock.stop
   end
 
   test 'all users types should get index' do

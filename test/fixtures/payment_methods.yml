@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+valid:
+  user: user1
+  brand: Visa
+  exp_month: 10
+  exp_year: 2020
+  last4: 1234
+  stripe_token_id: tok_19911LBWC5Qr8x20xT6aWl8l
+  stripe_card_id: card_19BDCIBWC5Qr8x20F371zDPp
+
+payment_method_admin:
+  user: payment_method_admin_user
+  brand: Visa
+  exp_month: 10
+  exp_year: 2020
+  last4: 1234
+  stripe_token_id: tok_19911LBWC5Qr8x20xT6aWl8l
+  stripe_card_id: card_19BDCIBWC5Qr8x20F371zDPp
+
+payment_method_regular:
+  user: payment_method_regular_user
+  brand: Visa
+  exp_month: 10
+  exp_year: 2020
+  last4: 1234
+  stripe_token_id: tok_19911LBWC5Qr8x20xT6aWl8l
+  stripe_card_id: card_19BDCIBWC5Qr8x20F371zDPp
+
+#two:
+#  user_id: user2
+#  brand: Visa
+#  exp_month: 1
+#  exp_year: 1
+#  last4: 1
+#  stripe_token_id: test
+#  stripe_card_id: test

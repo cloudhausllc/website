@@ -2,10 +2,15 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
+    StripeMock.start
     @user = User.new(first_name: 'Test',
                      last_name: 'User',
                      email: 'test_user@cloudhaus.org',
                      password: 'foobar123', password_confirmation: 'foobar123')
+  end
+
+  def teardown
+    StripeMock.stop
   end
 
   test 'should be valid' do

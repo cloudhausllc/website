@@ -3,7 +3,13 @@ require 'test_helper'
 class SessionsHelperTest < ActionView::TestCase
 
   def setup
+    StripeMock.start
     @user = users(:user1)
+  end
+
+  teardown do
+    log_out
+    StripeMock.stop
   end
 
   test 'should log in user' do

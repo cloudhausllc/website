@@ -1,7 +1,14 @@
 module SessionsHelper
 
   def log_in(user)
+    if current_user
+      log_out
+    end
+
     if user[:active]
+      if not user.in_stripe?
+        user.create_stripe_account
+      end
       session[:user_id] = user.id
       User.current_user = user
       return true

@@ -48,6 +48,9 @@ gem 'summernote-rails', '0.8.1.1'
 #Image uploading
 gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip.git'
 
+#Payment processing
+gem 'stripe'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -57,6 +60,7 @@ gem 'paperclip', git: 'git://github.com/thoughtbot/paperclip.git'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'stripe-ruby-mock', '~> 2.3.1', :require => 'stripe_mock'
 end
 
 group :development do

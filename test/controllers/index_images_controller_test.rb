@@ -2,6 +2,7 @@ require 'test_helper'
 
 class IndexImagesControllerTest < ActionController::TestCase
   setup do
+    StripeMock.start
     @admin_user = users(:admin_user)
     @regular_user = users(:regular_user)
 
@@ -16,6 +17,7 @@ class IndexImagesControllerTest < ActionController::TestCase
 
   teardown do
     log_out
+    StripeMock.stop
   end
 
   test 'admin should get index' do

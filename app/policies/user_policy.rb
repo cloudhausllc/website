@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    must_be_logged_in(user, record) and admin_or_self?(user, record)
+    false
   end
 
   def permitted_attributes_for_create
@@ -28,9 +28,9 @@ class UserPolicy < ApplicationPolicy
 
   def permitted_attributes_for_update
     if user[:admin]
-      [:first_name, :last_name, :password, :active, :admin, :email, :membership_level]
+      [:first_name, :last_name, :password, :active, :admin, :email, :plan_id]
     else
-      [:first_name, :last_name, :password, :email]
+      [:first_name, :last_name, :password, :email, :plan_id]
     end
   end
 

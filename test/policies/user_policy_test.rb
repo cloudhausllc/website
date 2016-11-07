@@ -15,6 +15,12 @@ class UserPolicyTest < PolicyAssertions::Test
     refute_permit nil, User
   end
 
+  def show
+    refute_permit @admin_user, User
+    refute_permit @regular_user, User
+    refute_permit nil, User
+  end
+
   def test_edit_and_update
     #Admins can edit self and others.
     assert_permit @admin_user, @admin_user
@@ -50,7 +56,7 @@ class UserPolicyTest < PolicyAssertions::Test
 
   def test_strong_parameters
     user_attributes = @regular_user.attributes
-    admin_params = [:id, :first_name, :last_name, :email, :password, :active, :admin, :membership_level]
+    admin_params = [:id, :first_name, :last_name, :email, :password, :active, :admin]
     regular_user_params = [:id, :first_name, :last_name, :email, :password]
     anonymous_params = [:id, :first_name, :last_name, :email, :password]
 

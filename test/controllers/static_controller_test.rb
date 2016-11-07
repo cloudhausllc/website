@@ -2,6 +2,12 @@ require 'test_helper'
 
 class StaticControllerTest < ActionController::TestCase
   setup do
+    StripeMock.start
+  end
+
+  teardown do
+    log_out
+    StripeMock.stop
   end
 
   test 'should get rules' do

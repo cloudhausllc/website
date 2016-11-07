@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :get_edit_and_update_vars, only: [:edit, :update]
+
+  # before_action :get_stripe_data, only: [:edit, :showd]
 
   # GET /users
   # GET /users.json
@@ -10,9 +13,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show
-    authorize @user
-  end
+  # def show
+  #   authorize @user
+  # end
 
   # GET /users/new
   def new
@@ -28,6 +31,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    # @new_payment_method = PaymentMethod.new
 
     respond_to do |format|
       if @user.save
@@ -47,7 +51,7 @@ class UsersController < ApplicationController
     authorize @user
     respond_to do |format|
       if @user.update(permitted_attributes(@user))
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to edit_user_path(@user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -76,5 +80,10 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(policy(@user || User).permitted_attributes)
+  end
+
+  def get_edit_and_update_vars
+    @new_payment_method = PaymentMethod.new
+    @plans = Plan.where(active: true)
   end
 end

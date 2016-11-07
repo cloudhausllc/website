@@ -1,0 +1,42 @@
+<% if not @user.payment_methods.empty? %>
+    <% if not @plans.nil? and not @plans.empty? %>
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <%= form_for @user do |f| %>
+                <%= f.select(:plan_id,
+                             options_for_select(
+                                 @plans.collect { |n|
+                                   ["#{n.stripe_plan_name} - #{number_to_currency(n.stripe_plan_amount/100)}", n.id]
+                                 },
+                                 selected: @user.plan_id), {include_blank: 'None - $0'},
+                             class: 'form-control',
+                             style: 'margin-bottom: 5px;')
+                %>
+                <%= f.submit 'Change Subscription', class: 'btn btn-info form-control', style: 'margin-bottom: 5px;' %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <%= form_for @user do |f| %>
+                <%= f.hidden_field :plan_id, value: -1 %>
+                <%= f.submit 'Cancel Subscription', class: 'btn btn-danger form-control', data: {confirm: 'Are you sure you want to cancel your subscription?'} %>
+            <% end %>
+          </div>
+        </div>
+
+    <% else %>
+        <div class="row">
+          <div class="col-md-offset-3 col-md-8">
+            There are currently no available subscription types.<br/>
+            Please try again later or contact <%= mail_to 'info@cloudhaus.org', 'info@cloudhaus.org' %> for assistance.
+          </div>
+        </div>
+    <% end %>
+<% else %>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-8">
+        You must define a payment method before you're able to change your membership.
+      </div>
+    </div>
+<% end %>

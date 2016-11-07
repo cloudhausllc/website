@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016190653) do
+ActiveRecord::Schema.define(version: 20161102031531) do
 
   create_table "asset_tools", force: :cascade do |t|
     t.boolean  "active",       default: false, null: false
@@ -41,13 +41,6 @@ ActiveRecord::Schema.define(version: 20161016190653) do
     t.text     "url"
   end
 
-  create_table "membership_levels", force: :cascade do |t|
-    t.decimal  "monthly_payment"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.text     "name"
-  end
-
   create_table "news_articles", force: :cascade do |t|
     t.integer  "user_id",                    null: false
     t.text     "subject"
@@ -57,16 +50,42 @@ ActiveRecord::Schema.define(version: 20161016190653) do
     t.datetime "updated_at",                 null: false
   end
 
+  create_table "payment_methods", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "brand"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.integer  "last4"
+    t.text     "stripe_token_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "stripe_card_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.text     "stripe_plan_id"
+    t.boolean  "active",                        default: true, null: false
+    t.text     "stripe_plan_name"
+    t.integer  "stripe_plan_amount"
+    t.text     "stripe_plan_interval"
+    t.integer  "stripe_plan_trial_period_days"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.text     "password_digest"
-    t.boolean  "active",              default: false, null: false
-    t.boolean  "admin",               default: false, null: false
+    t.boolean  "active",                 default: false, null: false
+    t.boolean  "admin",                  default: false, null: false
     t.integer  "membership_level_id"
+    t.text     "stripe_customer_id"
+    t.integer  "plan_id"
+    t.text     "stripe_subscription_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

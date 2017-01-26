@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20161102031531) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "asset_tools", force: :cascade do |t|
     t.boolean  "active",       default: false, null: false
     t.boolean  "on_premises",  default: false, null: false
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 20161102031531) do
     t.text     "brand"
     t.integer  "exp_month"
     t.integer  "exp_year"
-    t.integer  "last4"
+    t.text     "last4"
     t.text     "stripe_token_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false

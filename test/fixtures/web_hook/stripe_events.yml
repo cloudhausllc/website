@@ -2,16 +2,22 @@
 
 one:
   livemode: false
-  stripe_id: MyText
-  object: MyText
-  request: MyText
-  api_version: 2017-01-27 15:29:06
-  data: 
+  event_type: customer.updated
+  stripe_id: evt_19ghW2BWC5Qr8x20ozY0cnf4
+  object: event
+  request: req_A0ixCd9hsInI53
+  api_version: 2016-10-18 20:00:00
+  data: {"id":"cus_9dZl0Lfwob4wF5","object":"customer","account_balance":0,"created":1480214515,"currency":"usd","default_source":null,"delinquent":false,"description":null,"discount":null,"email":"luke@cloudhaus.org","livemode":false,"metadata":{},"shipping":null,"sources":{"object":"list","data":[],"has_more":false,"total_count":0,"url":"/v1/customers/cus_9dZl0Lfwob4wF5/sources"},"subscriptions":{"object":"list","data":[],"has_more":false,"total_count":0,"url":"/v1/customers/cus_9dZl0Lfwob4wF5/subscriptions"}}
+  processing:
+  processed:
 
 two:
   livemode: false
-  stripe_id: MyText
-  object: MyText
-  request: MyText
-  api_version: 2017-01-27 15:29:06
-  data: 
+  event_type: customer.updated
+  stripe_id: evt_19ghXABWC5Qr8x20OTv57kCZ
+  object: event
+  request: req_A0izcyu5XkmM2Q
+  api_version: 2016-10-18 20:00:00
+  data: {"id":"cus_9dZl0Lfwob4wF5","object":"customer","account_balance":0,"created":1480214515,"currency":"usd","default_source":"card_19ghX5BWC5Qr8x20XXZ1ialg","delinquent":false,"description":null,"discount":null,"email":"luke@cloudhaus.org","livemode":false,"metadata":{},"shipping":null,"sources":{"object":"list","data":[{"id":"card_19ghX5BWC5Qr8x20XXZ1ialg","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":"12345","address_zip_check":"pass","brand":"Visa","country":"US","customer":"cus_9dZl0Lfwob4wF5","cvc_check":"pass","dynamic_last4":null,"exp_month":10,"exp_year":2020,"fingerprint":"RqoYXKzMrET5aGPi","funding":"credit","last4":"4242","metadata":{},"name":"luke@cloudhaus.org","tokenization_method":null}],"has_more":false,"total_count":1,"url":"/v1/customers/cus_9dZl0Lfwob4wF5/sources"},"subscriptions":{"object":"list","data":[],"has_more":false,"total_count":0,"url":"/v1/customers/cus_9dZl0Lfwob4wF5/subscriptions"}}
+  processing:
+  processed:

@@ -66,7 +66,7 @@ class ApplicationPolicy
   end
 
   def must_be_logged_in(user, record)
-    if user
+    if user and user[:active]
       return true
     else
       return false

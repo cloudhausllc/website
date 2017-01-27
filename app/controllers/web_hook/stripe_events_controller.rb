@@ -6,31 +6,21 @@ class WebHook::StripeEventsController < ApplicationController
   # # GET /web_hook/stripe_events
   # # GET /web_hook/stripe_events.json
   def index
+    authorize WebHook::StripeEvent
     @web_hook_stripe_events = WebHook::StripeEvent.all
+
   end
 
   # GET /web_hook/stripe_events/1
   # GET /web_hook/stripe_events/1.json
   def show
+    authorize @web_hook_stripe_event
   end
 
   # POST /web_hook/stripe_events
   # POST /web_hook/stripe_events.json
   def create
-    # @stripe_event.save
     render :nothing => true, :status => 200, :content_type => 'text/html'
-
-    # @web_hook_stripe_event = WebHook::StripeEvent.new(web_hook_stripe_event_params)
-    #
-    # respond_to do |format|
-    #   if @web_hook_stripe_event.save
-    #     format.html { redirect_to @web_hook_stripe_event, notice: 'Stripe event was successfully created.' }
-    #     format.json { render :show, status: :created, location: @web_hook_stripe_event }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @web_hook_stripe_event.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   private

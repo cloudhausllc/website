@@ -1,37 +1,48 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="box">
+    <h1>Stripe Events</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+        <thead>
+        <tr>
+          <td class="text-center">Mode</td>
+          <td class="text-center">ID</td>
+          <td class="text-center">Object</td>
+          <td class="text-center">Request</td>
+          <td class="text-center">API Version</td>
+          <td class="text-center">Processing</td>
+          <td class="text-center">Processed</td>
+        </tr>
+        </thead>
 
-<h1>Listing Web Hook Stripe Events</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Livemode</th>
-      <th>Stripe</th>
-      <th>Object</th>
-      <th>Request</th>
-      <th>Api version</th>
-      <th>Data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @web_hook_stripe_events.each do |web_hook_stripe_event| %>
-      <tr>
-        <td><%= web_hook_stripe_event.livemode %></td>
-        <td><%= web_hook_stripe_event.stripe_id %></td>
-        <td><%= web_hook_stripe_event.object %></td>
-        <td><%= web_hook_stripe_event.request %></td>
-        <td><%= web_hook_stripe_event.api_version %></td>
-        <td><%= web_hook_stripe_event.data %></td>
-        <td><%= link_to 'Show', web_hook_stripe_event %></td>
-        <td><%= link_to 'Edit', edit_web_hook_stripe_event_path(web_hook_stripe_event) %></td>
-        <td><%= link_to 'Destroy', web_hook_stripe_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Stripe event', new_web_hook_stripe_event_path %>
+        <tbody>
+        <% @web_hook_stripe_events.each do |web_hook_stripe_event| %>
+            <tr class="">
+              <td class="text-center <%= web_hook_stripe_event.livemode ? 'production_' : 'testing_' %>mode">
+                <%= web_hook_stripe_event.livemode == true ? 'Production' : 'Testing' %>
+              </td>
+              <td><%= link_to web_hook_stripe_event.stripe_id, web_hook_stripe_event %></td>
+              <td><%= web_hook_stripe_event.object.titlecase %></td>
+              <td><%= web_hook_stripe_event.request %></td>
+              <td><%= web_hook_stripe_event.api_version %></td>
+              <td class="text-center">
+                <% if web_hook_stripe_event.processing.nil? %>
+                    <i class="text-danger glyphicon glyphicon-remove"></i>
+                <% else %>
+                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processing %>"></i>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <% if web_hook_stripe_event.processing.nil? %>
+                    <i class="text-danger glyphicon glyphicon-remove"></i>
+                <% else %>
+                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processed %>"></i>
+                <% end %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,0 @@
-json.partial! "web_hook_stripe_events/web_hook_stripe_event", web_hook_stripe_event: @web_hook_stripe_event

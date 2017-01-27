@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users
 
   namespace :web_hook do
-    resources :stripe_events
+    resources :stripe_events, only: [:index, :show, :create]
   end
 
   get '/login' => 'sessions#new', as: :login

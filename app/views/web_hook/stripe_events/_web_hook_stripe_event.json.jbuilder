@@ -1,2 +1,0 @@
-json.extract! web_hook_stripe_event, :id, :livemode, :stripe_id, :object, :request, :api_version, :data, :created_at, :updated_at
-json.url web_hook_stripe_event_url(web_hook_stripe_event, format: :json)

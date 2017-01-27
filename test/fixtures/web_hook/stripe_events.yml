@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  livemode: false
+  stripe_id: MyText
+  object: MyText
+  request: MyText
+  api_version: 2017-01-27 15:29:06
+  data: 
+
+two:
+  livemode: false
+  stripe_id: MyText
+  object: MyText
+  request: MyText
+  api_version: 2017-01-27 15:29:06
+  data: 

@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :news_articles
   resources :users
 
+  namespace :web_hook do
+    resources :stripe_events
+  end
+
   get '/login' => 'sessions#new', as: :login
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: :logout

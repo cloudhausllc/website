@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20170127232051) do
     t.text     "stripe_id",   null: false
     t.text     "object",      null: false
     t.text     "request"
-    t.datetime "api_version", null: false
+    t.datetime "api_version"
     t.json     "data",        null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

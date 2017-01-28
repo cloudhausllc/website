@@ -19,7 +19,7 @@
         <tbody>
         <% @users.each do |user| %>
             <tr class="">
-              <td><%= link_to user.email, user %></td>
+              <td><%= mail_to user.email %></td>
               <td><%= user.first_name %></td>
               <td><%= user.last_name %></td>
               <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.active ? fa_icon('check') : fa_icon('times') %></td>

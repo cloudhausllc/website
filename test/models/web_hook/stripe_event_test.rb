@@ -91,5 +91,19 @@ class WebHook::StripeEventTest < ActiveSupport::TestCase
     assert @stripe_event.valid?
   end
 
+  test 'mark as processing' do
+    assert_nil @stripe_event.processing
+    @stripe_event.mark_as_processing
+    @stripe_event.reload
+    assert_not_nil @stripe_event.processing
+  end
+
+  test 'mark as processed' do
+    assert_nil @stripe_event.processed
+    @stripe_event.mark_as_processed
+    @stripe_event.reload
+    assert_not_nil @stripe_event.processed
+  end
+
 
 end

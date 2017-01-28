@@ -64,11 +64,11 @@ class WebHook::StripeEventTest < ActiveSupport::TestCase
     end
   end
 
-  test 'api_version is required' do
+  test 'api_version is not required' do
     ['', ' ', nil].each do |test_var|
       @stripe_event.api_version = test_var
       @stripe_event.save
-      assert_not @stripe_event.valid?
+      assert @stripe_event.valid?
     end
 
     @stripe_event.api_version = 'test123'
@@ -101,6 +101,22 @@ class WebHook::StripeEventTest < ActiveSupport::TestCase
   test 'mark as processed' do
     assert_nil @stripe_event.processed
     @stripe_event.mark_as_processed
+    @stripe_event.reload
+    assert_not_nil @stripe_event.processed
+  end
+
+  test 'mark as processing class' do
+    event = WebHook::StripeEvent.find(@stripe_event.id)
+    assert_nil event.processing
+    WebHook::StripeEvent.mark_as_processing(event.id)
+    @stripe_event.reload
+    assert_not_nil @stripe_event.processing
+  end
+
+  test 'mark as processed class' do
+    event = WebHook::StripeEvent.find(@stripe_event.id)
+    assert_nil event.processed
+    WebHook::StripeEvent.mark_as_processed(event.id)
     @stripe_event.reload
     assert_not_nil @stripe_event.processed
   end

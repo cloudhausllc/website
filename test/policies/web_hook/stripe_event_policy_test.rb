@@ -27,4 +27,11 @@ class WebHook::StripeEventPolicyTest < PolicyAssertions::Test
   # def test_create
   #   TODO: Not sure how I'm going to do this yet.
   # end
+
+  def test_strong_parameters
+    user_attributes = @stripe_web_hook.attributes
+    parameters = [:livemode, :event_type, :stripe_id, :object, :request, :api_version, :data]
+
+    assert_strong_parameters(@admin_user, User, user_attributes, parameters)
+  end
 end

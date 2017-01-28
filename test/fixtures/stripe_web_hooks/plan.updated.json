@@ -1,0 +1,23 @@
+{
+  "created": 1326853478,
+  "livemode": false,
+  "id": "evt_00000000000000",
+  "type": "plan.updated",
+  "object": "event",
+  "data": {
+    "object": {
+      "interval": "year",
+      "name": "Member's Club",
+      "amount": 120,
+      "currency": "usd",
+      "id": "regular_member",
+      "object": "plan",
+      "livemode": false,
+      "interval_count": 1,
+      "trial_period_days": 12
+    },
+    "previous_attributes": {
+      "name": "Old name"
+    }
+  }
+}

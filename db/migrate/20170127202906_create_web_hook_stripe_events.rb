@@ -6,7 +6,7 @@ class CreateWebHookStripeEvents < ActiveRecord::Migration
       t.text :stripe_id, null: false
       t.text :object, null: false
       t.text :request
-      t.datetime :api_version, null: false
+      t.datetime :api_version
       t.json :data, null: false
       t.timestamps null: false
     end

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Livemode:</strong>
+  <%= @web_hook_stripe_event.livemode %>
+</p>
+
+<p>
+  <strong>Stripe:</strong>
+  <%= @web_hook_stripe_event.stripe_id %>
+</p>
+
+<p>
+  <strong>Object:</strong>
+  <%= @web_hook_stripe_event.object %>
+</p>
+
+<p>
+  <strong>Request:</strong>
+  <%= @web_hook_stripe_event.request %>
+</p>
+
+<p>
+  <strong>Api version:</strong>
+  <%= @web_hook_stripe_event.api_version %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @web_hook_stripe_event.data %>
+</p>
+
+<%= link_to 'Back', web_hook_stripe_events_path %>

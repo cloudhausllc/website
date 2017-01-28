@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102031531) do
+ActiveRecord::Schema.define(version: 20170127232051) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "asset_tools", force: :cascade do |t|
     t.boolean  "active",       default: false, null: false
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 20161102031531) do
     t.text     "brand"
     t.integer  "exp_month"
     t.integer  "exp_year"
-    t.integer  "last4"
+    t.text     "last4"
     t.text     "stripe_token_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -89,5 +92,23 @@ ActiveRecord::Schema.define(version: 20161102031531) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "web_hook_stripe_events", force: :cascade do |t|
+    t.boolean  "livemode",    null: false
+    t.text     "event_type",  null: false
+    t.text     "stripe_id",   null: false
+    t.text     "object",      null: false
+    t.text     "request"
+    t.datetime "api_version"
+    t.json     "data",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.datetime "processing"
+    t.datetime "processed"
+    t.integer  "user_id"
+  end
+
+  add_index "web_hook_stripe_events", ["stripe_id"], name: "index_web_hook_stripe_events_on_stripe_id", unique: true, using: :btree
+  add_index "web_hook_stripe_events", ["user_id"], name: "user_id_ix", using: :btree
 
 end

@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resources :tools
   end
   resources :news_articles
-  resources :users
+  resources :users, only: [:index, :new, :edit, :create, :update, :destroy]
+
+  namespace :web_hook do
+    resources :stripe_events, only: [:index, :show, :create]
+  end
 
   get '/login' => 'sessions#new', as: :login
   post '/login' => 'sessions#create'

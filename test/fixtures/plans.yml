@@ -13,3 +13,17 @@ two:
   stripe_plan_name: test
   stripe_plan_amount: test
   stripe_plan_interval: month
+
+regular_member:
+  stripe_plan_id: regular_member
+  active: true
+  stripe_plan_name: Regular Member
+  stripe_plan_amount: 10000
+  stripe_plan_interval: month
+
+gold_member:
+  stripe_plan_id: gold_member
+  active: true
+  stripe_plan_name: Gold Member
+  stripe_plan_amount: 10000
+  stripe_plan_interval: month

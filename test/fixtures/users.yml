@@ -51,6 +51,7 @@ regular_user:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: false
+  plan: regular_member
 
 payment_method_admin_user:
   first_name: Admin
@@ -59,6 +60,8 @@ payment_method_admin_user:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: true
+  stripe_customer_id: cus_9dZl0Lfwob4wF5
+  plan: regular_member
 
 
 payment_method_regular_user:
@@ -68,3 +71,5 @@ payment_method_regular_user:
   password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
   active: true
   admin: false
+  stripe_customer_id: cus_A0lKEUo1nH7tCJ
+  plan: regular_member

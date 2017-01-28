@@ -24,6 +24,11 @@ a {
   &:visited {
     color: #666;
   }
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
 }
 
 div {

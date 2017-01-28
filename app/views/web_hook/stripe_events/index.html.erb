@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="box">
+    <h1>Stripe Events</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+        <thead>
+        <tr>
+          <td class="text-center">Mode</td>
+          <td class="text-center">ID</td>
+          <td class="text-center">Object</td>
+          <td class="text-center">Request</td>
+          <td class="text-center">API Version</td>
+          <td class="text-center">Processing</td>
+          <td class="text-center">Processed</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @web_hook_stripe_events.each do |web_hook_stripe_event| %>
+            <tr class="">
+              <td class="text-center <%= web_hook_stripe_event.livemode ? 'production_' : 'testing_' %>mode">
+                <%= web_hook_stripe_event.livemode == true ? 'Production' : 'Testing' %>
+              </td>
+              <td><%= link_to web_hook_stripe_event.stripe_id, web_hook_stripe_event %></td>
+              <td><%= web_hook_stripe_event.object.titlecase %></td>
+              <td><%= web_hook_stripe_event.request %></td>
+              <td><%= web_hook_stripe_event.api_version %></td>
+              <td class="text-center">
+                <% if web_hook_stripe_event.processing.nil? %>
+                    <i class="text-danger glyphicon glyphicon-remove"></i>
+                <% else %>
+                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processing %>"></i>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <% if web_hook_stripe_event.processing.nil? %>
+                    <i class="text-danger glyphicon glyphicon-remove"></i>
+                <% else %>
+                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processed %>"></i>
+                <% end %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

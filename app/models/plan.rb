@@ -20,7 +20,7 @@ class Plan < ActiveRecord::Base
         end
       end
 
-      if self.stripe_plan_trial_period_days != stripe_plan[:trial_period_days].to_i
+      if self.stripe_plan_trial_period_days.to_i != stripe_plan[:trial_period_days].to_i
         errors.add(:base, 'There was an error activating this plan: Trial period days mismatch.')
         errors_found = true
       end

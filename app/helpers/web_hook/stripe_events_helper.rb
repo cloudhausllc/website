@@ -1,0 +1,2 @@
+module WebHook::StripeEventsHelper
+end

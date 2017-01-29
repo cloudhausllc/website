@@ -7,7 +7,7 @@ class WebHook::StripeEventsController < ApplicationController
   # # GET /web_hook/stripe_events.json
   def index
     authorize WebHook::StripeEvent
-    @web_hook_stripe_events = WebHook::StripeEvent.all.page(params[:page] || 0).per(15)
+    @web_hook_stripe_events = WebHook::StripeEvent.order(created_at: :desc).all.page(params[:page] || 0).per(15)
 
   end
 
@@ -96,7 +96,6 @@ class WebHook::StripeEventsController < ApplicationController
         @stripe_event.mark_as_processed
 
       elsif @stripe_event.event_type == 'customer.source.deleted'
-        @stripe_event.mark_as_processing
         @stripe_event.mark_as_processing
         PaymentMethod.find_by_stripe_card_id(@stripe_event['data']['id']).delete
         @stripe_event.mark_as_processed

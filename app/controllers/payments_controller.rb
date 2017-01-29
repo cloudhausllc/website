@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
   # GET /payments.json
   def index
     authorize Payment
-    @payments = Payment.all.includes(:user).page(params[:page] || 0).per(15)
+    @payments = Payment.all.includes(:user).all.order(created_at: :desc).page(params[:page] || 0).per(15)
   end
 
   private

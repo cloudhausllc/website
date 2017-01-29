@@ -1,7 +1,7 @@
 class Payment::DonationsController < PaymentsController
   def index
     authorize Payment::Donation
-    @donations = Payment::Donation.includes(:user).page(params[:page] || 0).per(15)
+    @donations = Payment::Donation.includes(:user).order(created_at: :desc).all.page(params[:page] || 0).per(15)
   end
 
   def new

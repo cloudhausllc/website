@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    false
+    must_be_logged_in(user, record) and admin_or_self?(user, record)
   end
 
   def permitted_attributes_for_create

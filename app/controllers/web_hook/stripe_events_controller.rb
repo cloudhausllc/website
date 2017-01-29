@@ -7,7 +7,7 @@ class WebHook::StripeEventsController < ApplicationController
   # # GET /web_hook/stripe_events.json
   def index
     authorize WebHook::StripeEvent
-    @web_hook_stripe_events = WebHook::StripeEvent.all
+    @web_hook_stripe_events = WebHook::StripeEvent.all.page(params[:page] || 0).per(15)
 
   end
 
@@ -34,17 +34,17 @@ class WebHook::StripeEventsController < ApplicationController
       # elsif @stripe_event.event_type == 'charge.failed'
       # elsif @stripe_event.event_type == 'charge.pending'
       # elsif @stripe_event.event_type == 'charge.refunded'
-      # elsif @stripe_event.event_type == 'charge.succeeded'
-      # elsif @stripe_event.event_type == 'charge.updated'
-      # elsif @stripe_event.event_type == 'charge.dispute.closed'
-      # elsif @stripe_event.event_type == 'charge.dispute.created'
-      # elsif @stripe_event.event_type == 'charge.dispute.funds_reinstated'
-      # elsif @stripe_event.event_type == 'charge.dispute.funds_withdrawn'
-      # elsif @stripe_event.event_type == 'charge.dispute.updated'
-      # elsif @stripe_event.event_type == 'coupon.created'
-      # elsif @stripe_event.event_type == 'coupon.deleted'
-      # elsif @stripe_event.event_type == 'coupon.updated'
-      if @stripe_event.event_type == 'customer.created'
+      if @stripe_event.event_type == 'charge.succeeded'
+        # elsif @stripe_event.event_type == 'charge.updated'
+        # elsif @stripe_event.event_type == 'charge.dispute.closed'
+        # elsif @stripe_event.event_type == 'charge.dispute.created'
+        # elsif @stripe_event.event_type == 'charge.dispute.funds_reinstated'
+        # elsif @stripe_event.event_type == 'charge.dispute.funds_withdrawn'
+        # elsif @stripe_event.event_type == 'charge.dispute.updated'
+        # elsif @stripe_event.event_type == 'coupon.created'
+        # elsif @stripe_event.event_type == 'coupon.deleted'
+        # elsif @stripe_event.event_type == 'coupon.updated'
+      elsif @stripe_event.event_type == 'customer.created'
         @stripe_event.mark_as_processing
         user = User.find_by_email(@stripe_event[:data]['email'])
         if user.stripe_customer_id.nil? or user.stripe_customer_id != @stripe_event[:data]['id']
@@ -97,6 +97,7 @@ class WebHook::StripeEventsController < ApplicationController
 
       elsif @stripe_event.event_type == 'customer.source.deleted'
         @stripe_event.mark_as_processing
+        @stripe_event.mark_as_processing
         PaymentMethod.find_by_stripe_card_id(@stripe_event['data']['id']).delete
         @stripe_event.mark_as_processed
         # elsif @stripe_event.event_type == 'customer.source.updated'
@@ -134,14 +135,18 @@ class WebHook::StripeEventsController < ApplicationController
         # elsif @stripe_event.event_type == 'order_return.created'
         # elsif @stripe_event.event_type == 'plan.created'
       elsif @stripe_event.event_type == 'plan.deleted'
+        @stripe_event.mark_as_processing
         Plan.find_by_stripe_plan_id(@stripe_event['data']['id']).update_attribute(:active, false)
+        @stripe_event.mark_as_processed
       elsif @stripe_event.event_type == 'plan.updated'
+        @stripe_event.mark_as_processing
         Plan.find_by_stripe_plan_id(@stripe_event['data']['id']).update_attributes(
             stripe_plan_amount: @stripe_event['data']['amount'],
             stripe_plan_interval: @stripe_event['data']['interval'],
             stripe_plan_trial_period_days: @stripe_event['data']['trial_period_days'],
             stripe_plan_name: @stripe_event['data']['name'],
         )
+        @stripe_event.mark_as_processed
         # elsif @stripe_event.event_type == 'product.created'
         # elsif @stripe_event.event_type == 'product.deleted'
         # elsif @stripe_event.event_type == 'product.updated'
@@ -163,7 +168,6 @@ class WebHook::StripeEventsController < ApplicationController
         # elsif @stripe_event.event_type == 'transfer.reversed'
         # elsif @stripe_event.event_type == 'transfer.updated'
       end
-
       render nothing: true, status: 200, content_type: 'text/html'
     else
       render nothing: true, status: 500, content_type: 'text/html'

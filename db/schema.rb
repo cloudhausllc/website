@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127232051) do
+ActiveRecord::Schema.define(version: 20170128061557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,18 @@ ActiveRecord::Schema.define(version: 20170127232051) do
     t.text     "stripe_card_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer  "amount"
+    t.integer  "user_id"
+    t.text     "type"
+    t.text     "stripe_token"
+    t.text     "notes"
+    t.text     "status"
+    t.json     "outcome"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "plans", force: :cascade do |t|
     t.text     "stripe_plan_id"
     t.boolean  "active",                        default: true, null: false
@@ -105,10 +117,8 @@ ActiveRecord::Schema.define(version: 20170127232051) do
     t.datetime "updated_at",  null: false
     t.datetime "processing"
     t.datetime "processed"
-    t.integer  "user_id"
   end
 
   add_index "web_hook_stripe_events", ["stripe_id"], name: "index_web_hook_stripe_events_on_stripe_id", unique: true, using: :btree
-  add_index "web_hook_stripe_events", ["user_id"], name: "user_id_ix", using: :btree
 
 end

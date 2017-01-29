@@ -1,3 +1,4 @@
+<%= paginate @web_hook_stripe_events %>
 <p id="notice"><%= notice %></p>
 <div class="row">
   <div class="box">
@@ -7,6 +8,7 @@
         <thead>
         <tr>
           <td class="text-center">Mode</td>
+          <td class="text-center">Type</td>
           <td class="text-center">ID</td>
           <td class="text-center">Object</td>
           <td class="text-center">Request</td>
@@ -22,6 +24,7 @@
               <td class="text-center <%= web_hook_stripe_event.livemode ? 'production_' : 'testing_' %>mode">
                 <%= web_hook_stripe_event.livemode == true ? 'Production' : 'Testing' %>
               </td>
+              <td><%= web_hook_stripe_event.event_type %></td>
               <td><%= link_to web_hook_stripe_event.stripe_id, web_hook_stripe_event %></td>
               <td><%= web_hook_stripe_event.object.titlecase %></td>
               <td><%= web_hook_stripe_event.request %></td>
@@ -46,3 +49,4 @@
     </div>
   </div>
 </div>
+<%= paginate @web_hook_stripe_events %>

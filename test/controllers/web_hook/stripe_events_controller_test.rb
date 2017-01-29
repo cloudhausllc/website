@@ -247,4 +247,14 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
       assert_response 500
     end
   end
+
+  private
+
+  def ensure_marked_as_processing(event)
+
+  end
+
+  def ensure_marked_as_processed(event)
+
+  end
 end

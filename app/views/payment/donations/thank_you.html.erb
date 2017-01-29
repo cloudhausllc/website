@@ -1,0 +1,17 @@
+<div class="col-md-8 col-md-offset-2">
+  <div class="row">
+    <h2>Your donations keep Cloudhaus growing!</h2>
+  </div>
+  <div class="row">
+    <h4>Thank you</h4>
+    We have received your donation of <strong><%= number_to_currency(@donation.amount/100) %></strong>.
+  </div>
+
+  <div class="row">
+    If you would like a receipt, please contact us at <%= mail_to 'info@cloudhaus.org' %>.
+  </div>
+
+</div>
+
+
+

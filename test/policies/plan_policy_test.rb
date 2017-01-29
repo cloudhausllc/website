@@ -36,6 +36,12 @@ class PlanPolicyTest < PolicyAssertions::Test
     refute_permit nil, Plan
   end
 
+  def test_new_and_update
+    refute_permit @admin_user, Plan
+    refute_permit @regular_user, Plan
+    refute_permit nil, Plan
+  end
+
   def test_strong_parameters
     plan_attributes = @plan.attributes
     admin_params = [:stripe_plan_id, :active, :stripe_plan_name, :stripe_plan_amount,

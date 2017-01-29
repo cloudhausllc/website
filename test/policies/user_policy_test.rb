@@ -5,7 +5,7 @@ class UserPolicyTest < PolicyAssertions::Test
     @regular_user = users(:regular_user)
     @user1 = users(:user1)
     @admin_user = users(:admin_user)
-    @available_actions = [:index, :new, :create, :edit, :update, :destroy]
+    @available_actions = [:index, :new, :create, :edit, :update, :destroy, :show]
   end
 
   def test_index
@@ -15,13 +15,7 @@ class UserPolicyTest < PolicyAssertions::Test
     refute_permit nil, User
   end
 
-  def show
-    refute_permit @admin_user, User
-    refute_permit @regular_user, User
-    refute_permit nil, User
-  end
-
-  def test_edit_and_update
+  def test_edit_and_show_and_update
     #Admins can edit self and others.
     assert_permit @admin_user, @admin_user
     assert_permit @admin_user, @regular_user

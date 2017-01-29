@@ -54,6 +54,9 @@ gem 'stripe'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+#Simple pagination
+gem 'kaminari'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

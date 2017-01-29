@@ -32,6 +32,12 @@ class PaymentMethodPolicyTest < PolicyAssertions::Test
     refute_permit nil, PaymentMethod
   end
 
+  def test_index_and_update_and_new
+    refute_permit @admin_user, PaymentMethod
+    refute_permit @regular_user, PaymentMethod
+    refute_permit nil, PaymentMethod
+  end
+
   def test_strong_parameters
     payment_method_params = @payment_method.attributes
     admin_params = [:user_id, :user_id, :brand, :exp_month, :exp_year, :last4, :stripe_token_id, :stripe_card_id]

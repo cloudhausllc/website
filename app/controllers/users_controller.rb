@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy]
-  before_action :get_edit_and_update_vars, only: [:edit, :update]
-
-  # before_action :get_stripe_data, only: [:edit, :showd]
+  before_action :set_user, only: [:edit, :update, :destroy, :show]
+  before_action :get_edit_and_update_vars, only: [:edit, :update, :show]
 
   # GET /users
   # GET /users.json
@@ -19,6 +17,11 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     authorize @user
+  end
+
+  def show
+    authorize @user
+    render :edit
   end
 
   # POST /users

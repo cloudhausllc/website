@@ -1,0 +1,51 @@
+<div class="col-md-8 col-md-offset-2">
+  <div class="row">
+    <h2>Your donations keep Cloudhaus growing!</h2>
+  </div>
+  <div class="row">To donate equipment or
+    tools, get in touch with us at <%= mail_to 'info@cloudhaus.org' %>
+  </div>
+  <div class="row col-md-6 col-md-offset-3">
+    <%= form_for(@donation, url: payment_donations_path) do |f| %>
+        <div class="panel panel-primary" style="margin-top: 1em;">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              Donate
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="alert alert-danger" id="form_errors" role="alert" style="display: none;">
+                <% if @donation.errors.any? %>
+                    <ul>
+                      <% @donation.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <div class="input-group top-buffer">
+                  <span class="input-group-addon">$</span>
+                  <%= f.text_field :amount, class: 'form-control', 'aria-label': 'Amount' %>
+                </div>
+
+                <%= f.hidden_field :stripe_token %>
+              </div>
+            </div>
+            <div class="row no-buffer top-buffer">
+                <%= f.text_area :notes, class: 'form-control', placeholder: 'Include Note' %>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <%= f.submit('Donate', id: 'donateButton', class: 'form-control') %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+
+

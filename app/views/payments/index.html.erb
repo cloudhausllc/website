@@ -1,0 +1,39 @@
+<%= paginate @payments %>
+<div class="panel panel-default">
+  <div class="panel-heading">Payments</div>
+  <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+    <thead>
+    <tr>
+      <td class="col-md-2">From</td>
+      <td class="col-md-1 text-center">Amount</td>
+      <td class="col-md-1 text-center">Type</td>
+      <td class="col-md-6">Notes</td>
+      <td class="col-md-2">Submitted On</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @payments.each do |payment| %>
+        <tr class="">
+          <td>
+            <% if not payment.user.nil? %>
+                <%= link_to payment.user.email, payment.user %>
+            <% else %>
+                <%# TODO: Replace Anonymous with the users e-mail...  %>
+                Anonymous
+            <% end %>
+          </td>
+          <td class="text-center"><%= number_to_currency(payment.amount/100) %></td>
+          <td class="text-center"><%= payment.pretty_type %></td>
+          <td>
+            <%= simple_format(payment.notes) %>
+          </td>
+          <td>
+            <%= payment.created_at.strftime('%c') %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate @payments %>

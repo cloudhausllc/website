@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   has_many :asset_tools, :class_name => 'Asset::Tool'
   has_many :index_images
 
+  has_many :payments
+  has_many :payment_donations, :class_name => 'Payment::Donation'
+
   has_many :payment_methods
 
   belongs_to :plan

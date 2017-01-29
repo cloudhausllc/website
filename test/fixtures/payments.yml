@@ -1,0 +1,31 @@
+small_payment:
+  amount: 10000
+  user_id: regular_user
+  type: Payment
+  notes: Thank you!
+  status: succeeded
+  outcome: {"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"}
+
+large_payment:
+  amount: 100000
+  user_id: admin_user
+  type: Payment
+  notes: Thank you!
+  status: succeeded
+  outcome: {"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"}
+
+small_donation:
+  amount: 10000
+  user_id: regular_user
+  type: Payment::Donation
+  notes: Thank you!
+  status: succeeded
+  outcome: {"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"}
+
+large_donation:
+  amount: 100000
+  user_id: admin_user
+  type: Payment::Donation
+  notes: Thank you!
+  status: succeeded
+  outcome: {"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"}

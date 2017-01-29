@@ -1,39 +1,40 @@
-<div class="row">
-  <div class="box">
-    <div class="col-lg-12 text-center">
-      <div id="carousel-example-generic" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators hidden-xs">
-          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
+<% if not @index_images.empty? %>
+    <div class="row">
+      <div class="box">
+        <div class="col-lg-12 text-center">
+          <div id="carousel-example-generic" class="carousel slide">
+            <!-- Indicators -->
+            <ol class="carousel-indicators hidden-xs">
+              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-          <% @index_images.each do |image| %>
-              <div class="item <%= image == @index_images.first ? 'active' : nil %>">
-                <%= link_to image_tag(image.image, class: 'img-responsive img-full'), (image.url ? image.url : index_image_path(image)) %>
-                <% if image.caption %>
-                    <div class="carousel-caption"><%= image.caption %></div>
-                <% end %>
-                </a>
-              </div>
-          <% end %>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+              <% @index_images.each do |image| %>
+                  <div class="item <%= image == @index_images.first ? 'active' : nil %>">
+                    <%= link_to image_tag(image.image, class: 'img-responsive img-full'), (image.url ? image.url : index_image_path(image)) %>
+                    <% if image.caption %>
+                        <div class="carousel-caption"><%= image.caption %></div>
+                    <% end %>
+                    </a>
+                  </div>
+              <% end %>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+              <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+              <span class="icon-next"></span>
+            </a>
+          </div>
         </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-          <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-          <span class="icon-next"></span>
-        </a>
       </div>
     </div>
-  </div>
-</div>
-
+<% end %>
 <div class="row">
   <div class="box">
     <div class="col-lg-12">

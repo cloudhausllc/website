@@ -71,3 +71,19 @@ div {
     list-style: square;
   }
 }
+
+.top-buffer {
+  margin-top: 5px;
+}
+
+.left-buffer {
+  margin-left: 5px;
+}
+
+.right-buffer {
+  margin-right: 5px;
+}
+
+.no-buffer {
+  margin: 0px;
+}

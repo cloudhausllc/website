@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :plans
   resources :payment_methods
   resources :index_images
@@ -6,11 +7,22 @@ Rails.application.routes.draw do
     resources :tools
   end
   resources :news_articles
-  resources :users, only: [:index, :new, :edit, :create, :update, :destroy]
+  resources :users
 
   namespace :web_hook do
     resources :stripe_events, only: [:index, :show, :create]
   end
+
+  resources :payments, only: [:index]
+
+  namespace :payment do
+    resources :donations, only: [:index, :new, :create]
+    get '/donations/thank_you' => 'donations#thank_you', as: :donations_thank_you
+  end
+
+  # get '/donate' => 'payment::donations#new', as: :donate
+  # post '/donate' => 'payment::donations#create', as: :donation_create
+
 
   get '/login' => 'sessions#new', as: :login
   post '/login' => 'sessions#create'

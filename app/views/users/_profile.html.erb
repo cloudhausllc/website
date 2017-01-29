@@ -13,15 +13,15 @@
     <div class="col-md-offset-3">
       <div class="row">
         <div class="col-md-4">
-          <div class="field">
+          <div class="row top-buffer">
             <%= f.label :first_name %>
             <%= f.text_field :first_name, class: 'form-control' %>
           </div>
-          <div class="field">
+          <div class="row top-buffer">
             <%= f.label :last_name %>
             <%= f.text_field :last_name, class: 'form-control' %>
           </div>
-          <div class="field">
+          <div class="row top-buffer">
             <%= f.label :email %>
             <%= f.text_field :email, class: 'form-control' %>
           </div>
@@ -29,31 +29,31 @@
         </div>
 
         <div class="col-md-4">
-          <div class="field">
+          <div class="row top-buffer left-buffer">
             <%= f.label :password %>
             <%= f.password_field :password, class: 'form-control' %>
           </div>
-          <div class="field">
+          <div class="row top-buffer left-buffer">
             <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, class: 'form-control' %>
           </div>
           <% if not User.current_user == @user and User.current_user.admin %>
-              <div class="field">
+              <div class="row top-buffer">
                 <%= f.label :active %>
                 <%= f.check_box :active %>
               </div>
 
-              <div class="field">
+              <div class="row top-buffer">
                 <%= f.label :admin %>
                 <%= f.check_box :admin %>
               </div>
           <% end %>
         </div>
       </div>
-      <div class="row">
+      <div class="row top-buffer">
         <div class="col-md-8">
           <div class="actions">
-            <%= f.submit 'Update', class: 'form-control' %>
+            <%= f.submit 'Update', class: 'btn btn-info form-control' %>
           </div>
         </div>
       </div>

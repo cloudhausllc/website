@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false unless user[:admin]
+    must_be_admin(@user, @record)
   end
 
   def show?
@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false unless user[:admin]
+    must_be_admin(@user, @record)
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false unless user[:admin]
+    must_be_admin(@user, @record)
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false unless user[:admin]
+    must_be_admin(@user, @record)
   end
 
   def scope

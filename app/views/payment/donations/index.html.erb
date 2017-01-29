@@ -1,0 +1,37 @@
+<%= paginate @donations %>
+<div class="panel panel-default">
+  <div class="panel-heading">Donations</div>
+  <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+    <thead>
+    <tr>
+      <td class="col-md-2">From</td>
+      <td class="col-md-1 text-center">Amount</td>
+      <td class="col-md-7">Notes</td>
+      <td class="col-md-2">Donated On</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @donations.each do |donation| %>
+        <tr class="">
+          <td>
+            <% if not donation.user.nil? %>
+                <%= link_to donation.user.email, donation.user %>
+            <% else %>
+                <%# TODO: Replace Anonymous with the users e-mail...  %>
+                Anonymous
+            <% end %>
+          </td>
+          <td class="text-center"><%= number_to_currency(donation.amount/100) %></td>
+          <td>
+            <%= simple_format(donation.notes) %>
+          </td>
+          <td>
+            <%= donation.created_at.strftime('%c') %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate @donations %>

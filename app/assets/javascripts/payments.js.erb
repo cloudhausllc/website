@@ -1,0 +1,33 @@
+$(document).on('click', '#donateButton', function (event) {
+  event.preventDefault();
+  $('#error_explanation').html('').hide();
+
+  var amount = $('input#payment_donation_amount').val();
+  amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+
+  amount = parseFloat(amount);
+
+  if (isNaN(amount)) {
+    $('#form_errors').html('<p>Please enter a valid amount in USD ($).</p>').show();
+  }
+  else if (amount < 5.00) {
+    $('#form_errors').html('<p>Donation amount must be at least $5.</p>').show();
+  }
+  else {
+    var handler = StripeCheckout.configure({
+      key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+      locale: 'auto',
+      name: 'Cloudhaus LLC',
+      description: 'One-time Donation',
+      token: function (token) {
+        $('input#payment_donation_stripe_token').val(token.id);
+        $('form').submit();
+      }
+    });
+
+    amount = amount * 100; // Needs to be an integer!
+    handler.open({
+      amount: Math.round(amount)
+    })
+  }
+});

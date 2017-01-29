@@ -38,12 +38,12 @@
             <%= f.password_field :password_confirmation, class: 'form-control' %>
           </div>
           <% if not User.current_user == @user and User.current_user.admin %>
-              <div class="row top-buffer">
+              <div class="row top-buffer left-buffer">
                 <%= f.label :active %>
                 <%= f.check_box :active %>
               </div>
 
-              <div class="row top-buffer">
+              <div class="row top-buffer left-buffer">
                 <%= f.label :admin %>
                 <%= f.check_box :admin %>
               </div>

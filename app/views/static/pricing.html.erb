@@ -48,26 +48,22 @@
         background: url('<%= image_path 'business.png' %>') repeat-x;
       }
 
-      ul.fa-icons li.yes:before {
-        font-family: 'FontAwesome';
-        content: '\f00c';
+      div.description i.glyphicon-ok:before {
         margin: 0 5px 0 -15px;
         color: green;
       }
 
-      ul.fa-icons li.no:before {
-        font-family: 'FontAwesome';
-        content: '\f00d';
+      div.description i.glyphicon-remove:before {
         margin: 0 5px 0 -15px;
         color: red;
       }
 
-      ul.fa-icons {
+      i.glyphicon {
         padding-left: 20px;
         list-style: none;
       }
 
-      ul.fa-icons li {
+      i.glyphicon {
         margin-bottom: 10px;
       }
     </style>
@@ -84,12 +80,10 @@
           </div>
         </div>
         <div class="description">
-          <ul class="fa-icons">
-            <li class="yes">Monitored access to <%= link_to 'facilities', facilities_path %></li>
-            <li class="yes">Monitored access to <%= link_to 'tools', facilities_path %></li>
-            <li class="yes">Training on tools and equipment</li>
-            <li class="yes">Help from our knowledgeable staff</li>
-          </ul>
+            <p><i class="glyphicon glyphicon-ok"></i>Monitored access to <%= link_to 'facilities', facilities_path %></p>
+            <p><i class="glyphicon glyphicon-ok"></i>Monitored access to <%= link_to 'tools', facilities_path %></p>
+            <p><i class="glyphicon glyphicon-ok"></i>Training on tools and equipment</p>
+            <p><i class="glyphicon glyphicon-ok"></i>Help from our knowledgeable staff</p>
         </div>
       </div>
     </div>

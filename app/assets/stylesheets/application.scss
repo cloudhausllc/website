@@ -17,5 +17,7 @@
  */
 
 @import "bootstrap-sprockets";
-@import "bootstrap-custom";
+@import "bootstrap";
+$font-size-base: 12px;
+//@import "bootstrap-custom";
 @import "summernote";

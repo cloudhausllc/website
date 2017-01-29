@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     authorize User
-    @users = User.all
+    @users = User.order(admin: :desc).order(first_name: :asc).order(last_name: :asc).all.page(params[:page] || 0).per(20)
   end
 
   # GET /users/new

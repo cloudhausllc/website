@@ -13,6 +13,7 @@
           <td class="text-center">Object</td>
           <td class="text-center">Request</td>
           <td class="text-center">API Version</td>
+          <td class="text-center">Received</td>
           <td class="text-center">Processing</td>
           <td class="text-center">Processed</td>
         </tr>
@@ -29,18 +30,19 @@
               <td><%= web_hook_stripe_event.object.titlecase %></td>
               <td><%= web_hook_stripe_event.request %></td>
               <td><%= web_hook_stripe_event.api_version %></td>
+              <td class="text-center"><%= web_hook_stripe_event.created_at.strftime('%c') %></td>
               <td class="text-center">
                 <% if web_hook_stripe_event.processing.nil? %>
                     <i class="text-danger glyphicon glyphicon-remove"></i>
                 <% else %>
-                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processing %>"></i>
+                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processing.strftime('%c') %>"></i>
                 <% end %>
               </td>
               <td class="text-center">
-                <% if web_hook_stripe_event.processing.nil? %>
+                <% if web_hook_stripe_event.processed.nil? %>
                     <i class="text-danger glyphicon glyphicon-remove"></i>
                 <% else %>
-                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processed %>"></i>
+                    <i class="test-success glyphicon glyphicon-ok" title="<%= web_hook_stripe_event.processed.strftime('%c') %>"></i>
                 <% end %></td>
             </tr>
         <% end %>

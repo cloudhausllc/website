@@ -6,7 +6,7 @@
           <%= image_tag index_image.image(:thumb) %>
         </div>
         <div class="index_actions" class="row">
-          <%= link_to fa_icon('edit'), edit_index_image_path(index_image) %><%= link_to fa_icon('trash'), index_image, method: :delete, data: {confirm: 'Are you sure?'} %>
+          <%= link_to glyph('edit'), edit_index_image_path(index_image) %><%= link_to glyph('trash'), index_image, method: :delete, data: {confirm: 'Are you sure?'} %>
         </div>
       </div>
   <% end %>

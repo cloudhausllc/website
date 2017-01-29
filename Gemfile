@@ -39,9 +39,6 @@ gem 'pundit'
 #Permissions tests helper
 gem 'policy-assertions'
 
-#FontAwesome library
-gem 'font-awesome-rails'
-
 #HTML text editor.
 gem 'summernote-rails', '0.8.1.1'
 

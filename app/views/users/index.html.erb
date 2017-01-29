@@ -22,12 +22,12 @@
               <td><%= mail_to user.email %></td>
               <td><%= user.first_name %></td>
               <td><%= user.last_name %></td>
-              <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.active ? fa_icon('check') : fa_icon('times') %></td>
-              <td class="text-center <%= user.admin ? 'true' : 'false' %>"><%= user.admin ? fa_icon('check') : fa_icon('times') %></td>
-              <td class="text-center"><%= link_to fa_icon('edit'), edit_user_path(user) %></td>
+              <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.active ? glyph('ok') : glyph('remove') %></td>
+              <td class="text-center <%= user.admin ? 'true' : 'false' %>"><%= user.admin ? glyph('ok') : glyph('remove') %></td>
+              <td class="text-center"><%= link_to glyph('edit'), edit_user_path(user) %></td>
               <td class="text-center">
                 <% unless current_user == user %>
-                    <%= link_to fa_icon('trash'), user, method: :delete, data: {confirm: 'Are you sure?'} %>
+                    <%= link_to glyph('trash'), user, method: :delete, data: {confirm: 'Are you sure?'} %>
                 <% end %>
               </td>
             </tr>

@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   before_filter do
     if session[:user_id]
       User.current_user = User.find(session[:user_id])
+    else
+      User.current_user = nil
     end
   end
 

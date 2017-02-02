@@ -27,6 +27,15 @@ payment_method_regular:
   stripe_token_id: tok_19911LBWC5Qr8x20xT6aWl8l
   stripe_card_id: card_19BDCIBWC5Qr8x20F371zDPp
 
+second_payment_method_regular:
+  user: second_payment_method_regular_user
+  brand: Visa
+  exp_month: 10
+  exp_year: 2020
+  last4: 1234
+  stripe_token_id: tok_19911LBWC5Qr8x20xTSdeSfd
+  stripe_card_id: card_19BDCIBWC5Qr8x2e4dnFSrgs
+
 #two:
 #  user_id: user2
 #  brand: Visa

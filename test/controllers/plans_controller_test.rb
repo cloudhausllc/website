@@ -26,12 +26,12 @@ class PlansControllerTest < ActionController::TestCase
     )
 
     @stripe_published_plan = Stripe::Plan.create(
-            amount: @published_plan[:stripe_plan_amount],
-            interval: @published_plan[:stripe_plan_interval],
-            name: @published_plan[:stripe_plan_name],
-            currency: 'usd',
-            id: @published_plan[:stripe_plan_id]
-        )
+        amount: @published_plan[:stripe_plan_amount],
+        interval: @published_plan[:stripe_plan_interval],
+        name: @published_plan[:stripe_plan_name],
+        currency: 'usd',
+        id: @published_plan[:stripe_plan_id]
+    )
   end
 
   teardown do
@@ -120,6 +120,38 @@ class PlansControllerTest < ActionController::TestCase
     assert_equal true, @published_plan.reload.active
 
     assert_redirected_to root_path
+  end
+
+  test 'admin should be able to update plan' do
+    log_in(@admin_user)
+    assert_equal @published_plan.admin_selectable_only, false
+
+    patch :update, id: @published_plan, plan: {admin_selectable_only: true}
+
+    @published_plan.reload
+    assert_equal @published_plan.admin_selectable_only, true
+
+  end
+
+  test 'regular user should not be able to update plan' do
+    log_in(@regular_user)
+
+    assert_equal @published_plan.admin_selectable_only, false
+
+    patch :update, id: @published_plan, plan: {admin_selectable_only: true}
+
+    @published_plan.reload
+    assert_equal @published_plan.admin_selectable_only, false
+  end
+
+  test 'anon should not be able to update plan' do
+
+    assert_equal @published_plan.admin_selectable_only, false
+
+    patch :update, id: @published_plan, plan: {admin_selectable_only: true}
+
+    @published_plan.reload
+    assert_equal @published_plan.admin_selectable_only, false
   end
 
 end

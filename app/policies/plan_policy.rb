@@ -18,7 +18,7 @@ class PlanPolicy < ApplicationPolicy
   end
 
   def update?
-    false
+    must_be_admin(user, record)
   end
 
   def new?
@@ -28,7 +28,7 @@ class PlanPolicy < ApplicationPolicy
   def permitted_attributes
     if not user.nil? and user[:admin]
       [:stripe_plan_id, :active, :stripe_plan_name, :stripe_plan_amount,
-       :stripe_plan_interval, :stripe_plan_trial_period_days]
+       :stripe_plan_interval, :stripe_plan_trial_period_days, :admin_selectable_only]
     else
       []
     end

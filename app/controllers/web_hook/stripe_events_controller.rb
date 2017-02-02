@@ -57,8 +57,11 @@ class WebHook::StripeEventsController < ApplicationController
         @stripe_event.mark_as_processing
         user = User.find_by_email(@stripe_event[:data]['email'])
         if not user.nil?
-          user.stripe_customer_id = nil
-          user.save
+          [:stripe_customer_id, :stripe_subscription_id, :plan_id].each do |key|
+            user.update_attribute(key, nil)
+          end
+          user.save(validate: false)
+          user.payment_methods.delete_all
         end
         @stripe_event.mark_as_processed
 

@@ -81,6 +81,7 @@ class UsersController < ApplicationController
 
   def get_edit_and_update_vars
     @new_payment_method = PaymentMethod.new
-    @plans = Plan.where(active: true)
+    @plans = policy_scope(Plan)
+    # @plans = Plan.where(active: true)
   end
 end

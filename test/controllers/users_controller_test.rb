@@ -7,6 +7,7 @@ class UsersControllerTest < ActionController::TestCase
     @user = users(:user1)
     @admin_user = users(:admin_user)
     @regular_user = users(:regular_user)
+    @admin_selectable_only_plan = plans(:admin_selectable_only_plan)
   end
 
   teardown do
@@ -93,6 +94,24 @@ class UsersControllerTest < ActionController::TestCase
   test 'anonymous can\'t get edit' do
     get :edit, id: @user
     assert_redirected_to root_path
+  end
+
+  test 'admin should see admin only plans for self' do
+    log_in(@admin_user)
+    get :edit, id: @admin_user
+    assert_includes assigns(:plans), @admin_selectable_only_plan
+  end
+
+  test 'admin should see admin only plans for other' do
+    log_in(@admin_user)
+    get :edit, id: @regular_user
+    assert_includes assigns(:plans), @admin_selectable_only_plan
+  end
+
+  test 'regular user should not see admin only plans for self' do
+    log_in(@regular_user)
+    get :edit, id: @regular_user
+    assert_not_includes assigns(:plans), @admin_selectable_only_plan
   end
 
   test 'admin should be able to update user' do
@@ -228,7 +247,6 @@ class UsersControllerTest < ActionController::TestCase
       log_out
     end
 
-    @admin_selectable_only_plan = plans(:admin_selectable_only_plan)
     stripe_helper = StripeMock.create_test_helper
     stripe_helper.create_plan(
         id: @admin_selectable_only_plan[:stripe_plan_id],

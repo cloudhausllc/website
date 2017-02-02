@@ -1,5 +1,4 @@
 class PlanPolicy < ApplicationPolicy
-
   def initialize(user, record)
     @user = user
     @record = record
@@ -33,5 +32,17 @@ class PlanPolicy < ApplicationPolicy
       []
     end
   end
+
+  class Scope < Scope
+    def resolve
+      if user_is_admin(user, scope)
+        scope.where(active: true)
+      else
+        scope.where(admin_selectable_only: false)
+      end
+    end
+  end
+
+
 end
 

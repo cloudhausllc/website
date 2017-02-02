@@ -38,7 +38,7 @@ class PlanPolicy < ApplicationPolicy
       if user_is_admin(user, scope)
         scope.where(active: true)
       else
-        scope.where(admin_selectable_only: false)
+        scope.where(admin_selectable_only: false, active: true)
       end
     end
   end

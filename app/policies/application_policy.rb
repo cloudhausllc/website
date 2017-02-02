@@ -49,6 +49,14 @@ class ApplicationPolicy
     def resolve
       scope
     end
+
+    def user_is_admin(user, record)
+      if not user.nil? and user[:admin]
+        return true
+      else
+        return false
+      end
+    end
   end
 
   private

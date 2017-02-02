@@ -61,5 +61,4 @@ class PlanPolicyTest < PolicyAssertions::Test
 
     assert_strong_parameters(nil, Plan, plan_attributes, anonymous_params)
   end
-
 end

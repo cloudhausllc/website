@@ -154,11 +154,86 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
 
-  test 'anonymouse users should not be able to destroy user' do
+  test 'anonymous users should not be able to destroy user' do
     assert_difference('User.count', 0) do
       delete :destroy, id: @user
     end
 
     assert_redirected_to root_path
+  end
+
+  test 'admin should be able to assign admin only plan to self' do
+    use_stripe_variables
+    log_in(@admin_plan_user)
+
+    patch :update, id: @admin_plan_user, user: {plan_id: @admin_selectable_only_plan.id}
+
+    @admin_plan_user.reload
+    assert_equal @admin_plan_user.plan_id, @admin_selectable_only_plan[:id]
+    assert_redirected_to edit_user_path(assigns(:user))
+  end
+
+  test 'admin should be able to assign admin only plan to other' do
+    use_stripe_variables
+    log_in(@admin_plan_user)
+
+    patch :update, id: @regular_plan_user, user: {plan_id: @admin_selectable_only_plan.id}
+
+    @regular_plan_user.reload
+    assert_equal @regular_plan_user.plan_id, @admin_selectable_only_plan[:id]
+    assert_redirected_to edit_user_path(assigns(:user))
+  end
+
+  test 'regular user should not be able to assign admin only plan to self' do
+    use_stripe_variables
+    log_in(@regular_plan_user)
+
+    patch :update, id: @regular_plan_user, user: {plan_id: @admin_selectable_only_plan.id}
+
+    @regular_plan_user.reload
+    assert_not_equal @regular_plan_user.plan_id, @admin_selectable_only_plan[:id]
+    # assert_redirected_to edit_user_path(assigns(:user))
+    assert :success
+  end
+
+  test 'regular user should not be able to assign admin only plan to other' do
+    use_stripe_variables
+    log_in(@regular_plan_user)
+
+    patch :update, id: @second_regular_plan_user, user: {plan_id: @admin_selectable_only_plan.id}
+
+    @second_regular_plan_user.reload
+    assert_not_equal @second_regular_plan_user.plan_id, @admin_selectable_only_plan[:id]
+    assert_redirected_to root_path
+  end
+
+  private
+
+  def use_stripe_variables
+    @admin_plan_user = users(:payment_method_admin_user) #Use for anything needing Stripe
+    @regular_plan_user = users(:payment_method_regular_user) #Use for anything needing Stripe
+    @second_regular_plan_user = users(:second_payment_method_regular_user) #Use for anything needing Stripe
+
+
+    [@admin_plan_user, @regular_plan_user, @second_regular_plan_user].each do |user|
+      log_in(user)
+      current_pm = user.payment_methods.first
+      user.payment_methods.create({
+                                      brand: current_pm.brand,
+                                      exp_month: current_pm.exp_month,
+                                      exp_year: current_pm.exp_year,
+                                      last4: current_pm.last4,
+                                      stripe_token_id: StripeMock.generate_card_token
+                                  })
+      log_out
+    end
+
+    @admin_selectable_only_plan = plans(:admin_selectable_only_plan)
+    stripe_helper = StripeMock.create_test_helper
+    stripe_helper.create_plan(
+        id: @admin_selectable_only_plan[:stripe_plan_id],
+        amount: @admin_selectable_only_plan[:stripe_plan_amount],
+        interval: @admin_selectable_only_plan[:stripe_plan_interval],
+        name: @admin_selectable_only_plan[:stripe_plan_name])
   end
 end

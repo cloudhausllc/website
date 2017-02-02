@@ -6,6 +6,7 @@ published_plan:
   stripe_plan_name: Published Plan
   stripe_plan_amount: 10000
   stripe_plan_interval: month
+  admin_selectable_only: false
 
 two:
   stripe_plan_id: MyText
@@ -13,6 +14,7 @@ two:
   stripe_plan_name: test
   stripe_plan_amount: test
   stripe_plan_interval: month
+  admin_selectable_only: false
 
 regular_member:
   stripe_plan_id: regular_member
@@ -20,6 +22,7 @@ regular_member:
   stripe_plan_name: Regular Member
   stripe_plan_amount: 10000
   stripe_plan_interval: month
+  admin_selectable_only: false
 
 gold_member:
   stripe_plan_id: gold_member
@@ -27,3 +30,12 @@ gold_member:
   stripe_plan_name: Gold Member
   stripe_plan_amount: 10000
   stripe_plan_interval: month
+  admin_selectable_only: false
+
+admin_selectable_only_plan:
+  stripe_plan_id: admin_only
+  active: true
+  stripe_plan_name: Admin Selectable Only Plan
+  stripe_plan_amount: 25000
+  stripe_plan_interval: month
+  admin_selectable_only: true

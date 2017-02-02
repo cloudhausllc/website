@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-  before_action :set_plan, only: [:destroy]
+  before_action :set_plan, only: [:destroy, :update]
 
   # GET /plans
   # GET /plans.json
@@ -36,6 +36,21 @@ class PlansController < ApplicationController
         #TODO: Display the actual error to the end user.
         flash[:danger] = 'There was an issue activating this plan.'
         format.html { redirect_to plans_path }
+        format.json { render json: @plan.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /plans/1
+  # PATCH/PUT /plans/1.json
+  def update
+    authorize @plan
+    respond_to do |format|
+      if @plan.update(permitted_attributes(@plan))
+        format.html { redirect_to plans_path, notice: 'Plan was successfully updated.' }
+        format.json { render :show, status: :ok, location: @plan }
+      else
+        format.html { render :edit }
         format.json { render json: @plan.errors, status: :unprocessable_entity }
       end
     end

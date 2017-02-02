@@ -50,7 +50,7 @@ class UserPolicyTest < PolicyAssertions::Test
 
   def test_strong_parameters
     user_attributes = @regular_user.attributes
-    admin_params = [:id, :first_name, :last_name, :email, :password, :active, :admin]
+    admin_params = [:id, :first_name, :last_name, :email, :password, :active, :admin, :admin_selectable_only]
     regular_user_params = [:id, :first_name, :last_name, :email, :password]
     anonymous_params = [:id, :first_name, :last_name, :email, :password]
 

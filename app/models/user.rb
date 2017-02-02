@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   validates :first_name, presence: true, length: {maximum: 50}
   validates :last_name, presence: true, length: {maximum: 50}
+  validates :password, length: {minimum: 8}, allow_nil: true
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255},
             format: {with: VALID_EMAIL_REGEX},
@@ -11,10 +13,8 @@ class User < ActiveRecord::Base
 
   # validates :password, presence: true, length: { minimum: 6 }
 
-  validates :password, length: {minimum: 8}, allow_nil: true
-
+  validate :admin_required_for_plan_change?, if: :plan_id_changed?
   validate :create_stripe_customer, on: :create
-
   validate :set_stripe_plan, on: :update
 
   has_many :news_articles
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
           return false
         end
       rescue => e
-        raise e
+        # raise e
         return false
       end
     end
@@ -56,6 +56,12 @@ class User < ActiveRecord::Base
       self.update_attribute(:stripe_customer_id, Stripe::Customer.create(:email => self.email).id)
     rescue => e
       raise e
+    end
+  end
+
+  def ensure_user_in_stripe
+    if not self.in_stripe?
+      self.create_stripe_account
     end
   end
 
@@ -88,10 +94,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def admin_required_for_plan_change?
+    if not self.plan.nil? and self.plan.admin_selectable_only? and not current_user.admin?
+      errors.add(:base, 'You must be an admin to select this plan.')
+      return false
+    end
+  end
+
   def set_stripe_plan
+    self.ensure_user_in_stripe if not self.plan_id.nil?
     if self.plan_id_changed?
       begin
-
         if self.plan_id.nil? or self.plan_id <= 0
           subscription = Stripe::Subscription.retrieve(self.stripe_subscription_id)
           subscription.delete
@@ -104,7 +117,7 @@ class User < ActiveRecord::Base
             self.stripe_subscription_id = subscription.save.id
           else
             #TODO: Problem here.
-
+            #TODO: Figure out what the problem I was talking about.. and be more descriptive with TODO's.
             self.stripe_subscription_id = Stripe::Subscription.create(
                 :customer => self.stripe_customer_id,
                 :plan => self.plan.stripe_plan_id
@@ -112,7 +125,7 @@ class User < ActiveRecord::Base
           end
         end
       rescue => e
-        error = 'There was a problem changing your plan. Please contact info@cloudhaus.org for futher assistance.'
+        error = 'There was a problem changing your plan. Please contact info@cloudhaus.org for further assistance.'
         error = Rails.env == 'development' ? "#{error} <br /> #{e.message}" : error
         errors.add(:base, error)
         #TODO: Eventually record e.message somewhere.

@@ -9,6 +9,11 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
     @admin_user = users(:admin_user)
     @payment_method_regular_user = users(:payment_method_regular_user)
 
+    [@payment_method_regular_user, @regular_user, @admin_user].each do |user|
+      stripe_user = Stripe::Customer.create(email: user.email).to_hash
+      user.update_attribute(:stripe_customer_id, stripe_user[:id])
+    end
+
   end
 
   teardown do
@@ -49,6 +54,7 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
 
   test 'should create customer.created event' do
     event = StripeMock.mock_webhook_event('customer.created', {
+        id: @regular_user.stripe_customer_id,
         email: @regular_user.email,
     })
 
@@ -62,6 +68,7 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
 
   test 'should create customer.deleted event' do
     event = StripeMock.mock_webhook_event('customer.deleted', {
+        id: @regular_user.stripe_customer_id,
         email: @regular_user.email,
     })
 
@@ -71,7 +78,9 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
     end
     @regular_user.reload
     assert_nil @regular_user.stripe_customer_id
-
+    assert_nil @regular_user.stripe_subscription_id
+    assert_nil @regular_user.plan_id
+    assert_empty @regular_user.payment_methods
   end
 
   test 'should create customer.updated event' do
@@ -148,6 +157,7 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
 
   test 'should create customer.subscription.created event' do
     event = StripeMock.mock_webhook_event('customer.subscription.created', {
+        customer: @payment_method_regular_user.stripe_customer_id,
         email: @payment_method_regular_user.email,
     })
 
@@ -169,6 +179,7 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
     assert_not_nil @payment_method_regular_user.plan_id
 
     event = StripeMock.mock_webhook_event('customer.subscription.deleted', {
+        customer: @payment_method_regular_user.stripe_customer_id,
         email: @payment_method_regular_user.email,
     })
 
@@ -182,6 +193,7 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
 
   test 'should create customer.subscription.updated event' do
     event = StripeMock.mock_webhook_event('customer.subscription.updated', {
+        customer: @payment_method_regular_user.stripe_customer_id,
         email: @payment_method_regular_user.email,
     })
 

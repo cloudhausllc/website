@@ -45,7 +45,7 @@ class UserPolicy < ApplicationPolicy
   def permitted_attributes
     if not user.nil?
       if user[:admin]
-        [:first_name, :last_name, :password, :active, :admin, :email]
+        [:first_name, :last_name, :password, :active, :admin, :email, :admin_selectable_only]
       else
         [:first_name, :last_name, :password, :email]
       end

@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
     if self.plan_id_changed?
       begin
         if self.plan_id.nil? or self.plan_id <= 0
-          subscription = Stripe::Subscription.retrieve(self.stripe_subscription_id)
+          subscription = Stripe::Subscription.retrieve(self.changed_attributes[:stripe_subscription_id])
           subscription.delete
           self.plan_id = nil
           self.stripe_subscription_id = nil

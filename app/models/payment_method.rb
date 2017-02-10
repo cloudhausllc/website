@@ -73,17 +73,12 @@ class PaymentMethod < ActiveRecord::Base
   def remove_user_subscription
     begin
       if not self.user.stripe_subscription_id.nil?
-
-        #Remove the card from the user in Stripe.
-        Stripe::Customer.retrieve(self.user.stripe_customer_id).sources.retrieve(self.stripe_card_id).delete()
-
         #Remove the users subscription from Stripe.
         Stripe::Subscription.retrieve(self.user.stripe_subscription_id)
 
         #Update our database to reflect the changes.
         self.user.update_attributes(plan_id: nil, stripe_subscription_id: nil)
       end
-
     rescue => e
       error = 'There was a problem removing your subscription. Please contact info@cloudhaus.org for further assistance.'
       error = Rails.env == 'development' ? "#{error} <br /> #{self.user.errors.inspect}" : error

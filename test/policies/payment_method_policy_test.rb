@@ -5,6 +5,9 @@ class PaymentMethodPolicyTest < PolicyAssertions::Test
     @admin_user = users(:payment_method_admin_user)
     @regular_user = users(:payment_method_regular_user)
 
+    @admin_user_no_payment_method = users(:admin_user)
+    @regular_user_no_payment_method = users(:regular_user)
+
     @admin_payment_method = payment_methods(:payment_method_admin)
     @payment_method = payment_methods(:payment_method_regular)
 
@@ -27,9 +30,11 @@ class PaymentMethodPolicyTest < PolicyAssertions::Test
 
   def test_create
     #Admins and regular users can create payment methods.
-    assert_permit @admin_user, PaymentMethod
-    assert_permit @regular_user, PaymentMethod
-    refute_permit nil, PaymentMethod
+    # refute_permit @admin_user, PaymentMethod
+    # refute_permit @regular_user, PaymentMethod
+    assert_permit @admin_user_no_payment_method, PaymentMethod
+    # assert_permit @regular_user_no_payment_method, PaymentMethod
+    # refute_permit nil, PaymentMethod
   end
 
   def test_index_and_update_and_new

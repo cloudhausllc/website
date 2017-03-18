@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :charges
+  resources :invoices
   resources :plans
   resources :payment_methods
   resources :index_images

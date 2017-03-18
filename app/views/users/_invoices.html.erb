@@ -1,0 +1,37 @@
+<% if not @user.invoices.empty? %>
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+        <thead>
+        <tr>
+          <td>stripe_id</td>
+          <td>Preiod Start</td>
+          <td>Period End</td>
+          <td>Description</td>
+          <td class="text-center">Closed</td>
+          <td class="text-center">Attempt Count</td>
+          <td class="text-center">Total</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @user.invoices.each do |invoice| %>
+            <tr>
+              <td><%= link_to invoice[:stripe_id], invoice_path(invoice[:id]) %></td>
+              <td><%= Time.at(invoice[:period_start]).strftime('%c') %></td>
+              <td><%= Time.at(invoice[:period_end]).strftime('%c') %></td>
+              <td><%= invoice[:description] || 'N/A' %></td>
+              <td class="text-center"><%= invoice[:closed] %></td>
+              <td class="text-center"><%= invoice[:attempt_count] %></td>
+              <td class="text-center"><%= number_to_currency(invoice[:total]/100) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+<% else %>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-8">
+        No invoices yet.
+      </div>
+    </div>
+<% end %>

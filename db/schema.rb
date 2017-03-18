@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201001531) do
+ActiveRecord::Schema.define(version: 20170211000119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,29 @@ ActiveRecord::Schema.define(version: 20170201001531) do
     t.datetime "updated_at",                   null: false
   end
 
+  create_table "charges", force: :cascade do |t|
+    t.text     "stripe_id"
+    t.text     "customer_id"
+    t.text     "source_id"
+    t.text     "invoice_id"
+    t.integer  "amount"
+    t.integer  "amount_refunded"
+    t.integer  "created"
+    t.text     "description"
+    t.string   "dispute"
+    t.string   "failure_code"
+    t.string   "failure_message"
+    t.json     "outcome"
+    t.text     "status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "charges", ["customer_id"], name: "index_charges_on_customer_id", using: :btree
+  add_index "charges", ["invoice_id"], name: "index_charges_on_invoice_id", using: :btree
+  add_index "charges", ["source_id"], name: "index_charges_on_source_id", using: :btree
+  add_index "charges", ["stripe_id"], name: "index_charges_on_stripe_id", using: :btree
+
   create_table "index_images", force: :cascade do |t|
     t.boolean  "active",             default: false, null: false
     t.integer  "user_id",                            null: false
@@ -43,6 +66,35 @@ ActiveRecord::Schema.define(version: 20170201001531) do
     t.text     "caption"
     t.text     "url"
   end
+
+  create_table "invoices", force: :cascade do |t|
+    t.text     "stripe_id"
+    t.text     "subscription_id"
+    t.text     "charge_id"
+    t.text     "customer_id"
+    t.integer  "amount_due"
+    t.integer  "attempt_count"
+    t.boolean  "attempted"
+    t.boolean  "closed"
+    t.integer  "date"
+    t.text     "description"
+    t.boolean  "livemode"
+    t.integer  "next_payment_attempt"
+    t.integer  "period_start"
+    t.integer  "period_end"
+    t.integer  "subtotal"
+    t.integer  "tax"
+    t.integer  "tax_percent"
+    t.integer  "total"
+    t.boolean  "payment_succeeded"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "invoices", ["charge_id"], name: "index_invoices_on_charge_id", using: :btree
+  add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id", using: :btree
+  add_index "invoices", ["stripe_id"], name: "index_invoices_on_stripe_id", using: :btree
+  add_index "invoices", ["subscription_id"], name: "index_invoices_on_subscription_id", using: :btree
 
   create_table "news_articles", force: :cascade do |t|
     t.integer  "user_id",                    null: false

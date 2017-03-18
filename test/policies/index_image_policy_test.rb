@@ -55,14 +55,14 @@ class IndexImagePolicyTest < PolicyAssertions::Test
   end
 
   def test_strong_parameters
-    asset_tool_attributes = @active_index_image.attributes
+    image_attributes = @active_index_image.attributes
     admin_params = [:id, :user_id, :image, :active, :caption, :url]
     regular_user_params = []
     anonymous_params = []
 
-    assert_strong_parameters(@admin_user, IndexImage, asset_tool_attributes, admin_params)
-    assert_strong_parameters(@regular_user, IndexImage, asset_tool_attributes, regular_user_params)
-    assert_strong_parameters(nil, IndexImage, asset_tool_attributes, anonymous_params)
+    assert_strong_parameters(@admin_user, IndexImage, image_attributes, admin_params)
+    assert_strong_parameters(@regular_user, IndexImage, image_attributes, regular_user_params)
+    assert_strong_parameters(nil, IndexImage, image_attributes, anonymous_params)
   end
 
 end

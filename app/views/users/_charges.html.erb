@@ -1,0 +1,33 @@
+<% if not @user.charges.empty? %>
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-striped" style="width: 100%;">
+        <thead>
+        <tr>
+          <td>stripe_id</td>
+          <td>Created</td>
+          <td>Status</td>
+          <td>Description</td>
+          <td class="text-center">Amount</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @user.charges.each do |charge| %>
+            <tr>
+              <td><%= link_to charge[:stripe_id], charge_path(charge[:id]) %></td>
+              <td><%= Time.at(charge[:created]).strftime('%c') %></td>
+              <td><%= charge[:status].titleize %></td>
+              <td><%= charge[:description] || 'N/A' %></td>
+              <td class="text-center"><%= number_to_currency(charge[:amount]/100) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+<% else %>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-8">
+        No charges yet.
+      </div>
+    </div>
+<% end %>

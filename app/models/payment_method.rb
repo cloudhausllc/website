@@ -17,6 +17,8 @@ class PaymentMethod < ActiveRecord::Base
   belongs_to :user
   has_many :plans
 
+  has_many :charges, foreign_key: :stripe_id, primary_key: :source_id
+
 
   private
 
@@ -59,7 +61,12 @@ class PaymentMethod < ActiveRecord::Base
 
   def remove_from_stripe
     begin
-      Stripe::Customer.retrieve(self.user.stripe_customer_id).sources.retrieve(self.stripe_card_id).delete()
+      #Blast away all of the customers sources, just to be sure we get them all. Until I'm able to spend more time
+      # making sure twe don't accidentally keep a payment method stored, we're only supporting a single payment method
+      # per person.
+      Stripe::Customer.retrieve(self.user.stripe_customer_id).sources.each do |source|
+        source.delete()
+      end
     rescue => e
       error = 'There was a problem removing this payment source. Please contact info@cloudhaus.org for further assistance.'
       error = Rails.env == 'development' ? "#{error} <br /> #{e.message}" : error
@@ -73,17 +80,12 @@ class PaymentMethod < ActiveRecord::Base
   def remove_user_subscription
     begin
       if not self.user.stripe_subscription_id.nil?
-
-        #Remove the card from the user in Stripe.
-        Stripe::Customer.retrieve(self.user.stripe_customer_id).sources.retrieve(self.stripe_card_id).delete()
-
         #Remove the users subscription from Stripe.
         Stripe::Subscription.retrieve(self.user.stripe_subscription_id)
 
         #Update our database to reflect the changes.
         self.user.update_attributes(plan_id: nil, stripe_subscription_id: nil)
       end
-
     rescue => e
       error = 'There was a problem removing your subscription. Please contact info@cloudhaus.org for further assistance.'
       error = Rails.env == 'development' ? "#{error} <br /> #{self.user.errors.inspect}" : error

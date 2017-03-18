@@ -1,0 +1,31 @@
+admin_charge:
+  stripe_id: ch_dSirsEBWC5Qr8x20Wj8JA6WM
+  customer_id: cus_h9hGDI0Lfwob4w
+#  customer: admin_charge_user
+  source_id: card_19yd094BWC5rKspW0mUPdQ1Lg
+  invoice_id: in_UoSodnWoDmfAi40d22Tj9ezB
+  amount: 25000
+  amount_refunded: 0
+  created: 1489702211
+  description:
+  dispute:
+  failure_code:
+  failure_message:
+  outcome: {"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"}
+  status:
+
+regular_user_charge:
+  stripe_id: ch_19y70KBWC5Qr8x20RjXoApWM
+  customer_id: cus_9dZl0dWkcb4wF5
+#  customer: regular_charge_user
+  source_id: card_19y7ImDHC5Qr8x2I8S0W31Lg
+  invoice_id: in_19y70KBWC5QrAsBi8YtlglP9
+  amount: 3500
+  amount_refunded: 0
+  created: 1489703012
+  description:
+  dispute:
+  failure_code:
+  failure_message:
+  outcome: {"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"}
+  status: succeeded

@@ -27,7 +27,7 @@
 
 <p>
   <strong>Data:</strong>
-  <%= @web_hook_stripe_event.data %>
+  <pre><%= JSON.pretty_generate(@web_hook_stripe_event.data) %></pre>
 </p>
 
 <%= link_to 'Back', web_hook_stripe_events_path %>

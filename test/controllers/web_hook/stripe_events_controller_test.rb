@@ -254,9 +254,10 @@ class WebHook::StripeEventsControllerTest < ActionController::TestCase
   end
 
   test 'invalid web hooks should return 500' do
-    assert_difference('WebHook::StripeEvent.count', 0) do
-      post :create, {invalid: :hook}, format: :json
-      assert_response 500
+    assert_raises Stripe::InvalidRequestError do
+      assert_difference('WebHook::StripeEvent.count', 0) do
+        post :create, {invalid: :hook}, format: :json
+      end
     end
   end
 

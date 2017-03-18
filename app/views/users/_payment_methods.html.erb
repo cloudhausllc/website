@@ -1,4 +1,4 @@
-<% if not @user.payment_methods.nil? %>
+<% if @user.payment_methods.count > 0 %>
     <% @user.payment_methods.each do |card| %>
         <div class="row">
           <div class="col-md-offset-3 col-md-6">

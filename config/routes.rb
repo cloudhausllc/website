@@ -30,9 +30,11 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: :logout
 
+
   get '/rules' => 'static#rules', as: :rules
   get '/facilities' => 'static#facilities', as: :facilities
   get '/pricing' => 'static#pricing', as: :pricing
+  get '/how_to_apply' => 'static#how_to_apply', as: :how_to_apply
   get '/faq' => 'static#faq', as: :faq
 
   root 'index#index'

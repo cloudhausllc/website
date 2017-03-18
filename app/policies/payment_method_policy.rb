@@ -14,7 +14,8 @@ class PaymentMethodPolicy < ApplicationPolicy
   end
 
   def create?
-    must_be_logged_in(user, record)
+    #Users can only have one payment method.
+    must_be_logged_in(user, record) and user.payment_methods.count == 0
   end
 
   def update?

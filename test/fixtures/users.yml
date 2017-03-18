@@ -79,3 +79,41 @@ second_payment_method_regular_user:
   active: true
   admin: false
   plan: regular_member
+
+admin_charge_user:
+  first_name: Admin
+  last_name: User
+  email: admin_charge_user@cloudhaus.org
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: true
+  stripe_customer_id: cus_h9hGDI0Lfwob4w
+
+regular_charge_user:
+  first_name: Regular
+  last_name: User
+  email: regular_charge_user@gmail.com
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: false
+  plan: regular_member
+  stripe_customer_id: cus_9dZl0dWkcb4wF5
+
+admin_invoice_user:
+  first_name: Admin
+  last_name: User
+  email: admin_invoice_user@cloudhaus.org
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: true
+  stripe_customer_id: cus_h9hGDkAwe8sdb4w
+
+regular_invoice_user:
+  first_name: Regular
+  last_name: User
+  email: regular_invoice_user@gmail.com
+  password_digest: <%= BCrypt::Password.create("password", cost: 4) %>
+  active: true
+  admin: false
+  plan: regular_member
+  stripe_customer_id: cus_9dZAerijsdfDEwF5

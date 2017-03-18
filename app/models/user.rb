@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
 
   has_many :payment_methods
 
+  has_many :charges, foreign_key: :customer_id, primary_key: :stripe_customer_id
+
+  has_many :invoices, foreign_key: :customer_id, primary_key: :stripe_customer_id
+
   belongs_to :plan
 
   cattr_accessor :current_user

@@ -1,0 +1,41 @@
+admin_invoice:
+  stripe_id: in_UoSodnWoDmfAi40d22Tj9ezB
+  subscription_id: owner_plan
+  charge_id: in_UoSodnWoDmfAi40d22Tj9ezB
+  customer_id: cus_h9hGDI0Lfwob4w
+  amount_due: 25000
+  attempt_count: 0
+  attempted: true
+  closed: true
+  date: 1486773058
+  description:
+  livemode:
+  next_payment_attempt:
+  period_start: 1486773058
+  period_end: 1486773058
+  subtotal: 25000
+  tax:
+  tax_percent:
+  total: 25000
+  payment_succeeded:
+
+regular_user_invoice:
+  stripe_id: in_19y70KBWC5QrAsBi8YtlglP9
+  subscription_id: regular_member
+  charge_id: ch_19y70KBWC5Qr8x20RjXoApWM
+  customer_id: cus_9dZl0dWkcb4wF5
+  amount_due: 3500
+  attempt_count: 0
+  attempted: true
+  closed: true
+  date: 1489703012
+  description:
+  livemode:
+  next_payment_attempt:
+  period_start: 1489194622
+  period_end: 1489703012
+  subtotal: 3500
+  tax:
+  tax_percent:
+  total: 3500
+  payment_succeeded:

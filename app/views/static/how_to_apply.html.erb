@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-8">
+    <h2>How To Apply</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <p>
+      So you've <%= mail_to 'info@cloudhaus.org', 'got in touch with us' %> and gotten a tour of
+      <%= link_to 'the space', facilities_path %>, you've read through the <%= link_to 'FAQ', faq_path %>,
+      and now you're ready to join us to make some cool stuff. How do you do that?</p>
+    <p>
+      The first step is to <%= link_to 'register for an account', new_user_path %>. Once you've done that,
+      send us an e-mail at <%= mail_to 'info@cloudhaus.org', 'info@cloudhaus.org', subject: 'I\'m ready to sign up!' %>
+      to let us know that you're ready to sign up.
+
+    </p>
+    <p>
+      From there, one of us will set up a time with you to finish the application process.
+    </p>
+    <p>
+      If you have any questions at any time, please send us an e-mail
+      at <%= mail_to 'info@cloudhaus.org', 'info@cloudhaus.org' %>
+    </p>
+  </div>
+</div>

@@ -7,4 +7,7 @@ class StaticController < ApplicationController
 
   def pricing
   end
+
+  def how_to_apply
+  end
 end

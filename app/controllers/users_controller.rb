@@ -28,11 +28,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    # @new_payment_method = PaymentMethod.new
 
     respond_to do |format|
       if @user.save
-        flash[:warning] = 'Your account has been created, but must be activated by an administrator.'
+        flash[:warning] = 'Your account has been created.'
         format.html { redirect_to login_path }
         format.json { render :show, status: :created, location: @user }
       else

@@ -6,7 +6,16 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     authorize User
-    @users = User.order(admin: :desc).order(first_name: :asc).order(last_name: :asc).all.page(params[:page] || 0).per(20)
+    @users = User.order(admin: :desc).order(active: :desc).order(first_name: :asc).order(last_name: :asc).includes(:plan).all.page(params[:page] || 0).per(20)
+
+    @stripe_total = 0
+
+    User.includes(:plan).each do |user|
+      if user.plan
+        @stripe_total += user.plan.stripe_plan_amount
+      end
+    end
+
   end
 
   # GET /users/new

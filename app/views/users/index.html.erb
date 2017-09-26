@@ -10,6 +10,8 @@
           <td>First name</td>
           <td>Last name</td>
           <td>Email</td>
+          <td>Plan</td>
+          <td>$/mo</td>
           <td>Created</td>
           <td class="text-center">Active</td>
           <td class="text-center">Admin</td>
@@ -24,6 +26,13 @@
               <td><%= user.first_name %></td>
               <td><%= user.last_name %></td>
               <td><%= mail_to user.email %></td>
+              <% if user.plan %>
+                  <td><%= user.plan.stripe_plan_name %></td>
+                  <td><%= number_to_currency(user.plan.stripe_plan_amount/100) %></td>
+              <% else %>
+                  <td>None</td>
+                  <td>$0</td>
+              <% end %>
               <td><%= user.created_at.strftime('%c') %></td>
               <td class="text-center <%= user.active ? 'true' : 'false' %>"><%= user.active ? glyph('ok') : glyph('remove') %></td>
               <td class="text-center <%= user.admin ? 'true' : 'false' %>"><%= user.admin ? glyph('ok') : glyph('remove') %></td>
@@ -35,6 +44,10 @@
               </td>
             </tr>
         <% end %>
+        <tr>
+          <td colspan="4" style="font-weight: bold;">Total</td>
+          <td colspan="6"><%= number_to_currency(@stripe_total/100) %></td>
+        </tr>
         </tbody>
       </table>
       <%= paginate @users %>
